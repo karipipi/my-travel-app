@@ -8,58 +8,61 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <style>
     :root {
-      --bg: #F0F4F8;
+      --bg: #F1F5F9;
       --card-bg: #FFFFFF;
-      --primary: #0F52BA;
-      --primary-gradient: linear-gradient(135deg, #1E6B9B 0%, #0F4C81 100%);
-      --accent: #E67E22;
-      --gold: #D48806;
+      --primary: #0284C7;
+      --primary-dark: #0369A1;
+      --primary-soft: #E0F2FE;
+      --accent: #F59E0B;
+      --gold: #D97706;
+      --gold-bg: #FEF3C7;
       --green: #10B981;
+      --green-soft: #D1FAE5;
       --danger: #EF4444;
-      --text-main: #1E293B;
+      --text-main: #0F172A;
       --text-sub: #64748B;
+      --text-muted: #94A3B8;
       --border: #E2E8F0;
-      --glass: rgba(255, 255, 255, 0.85);
-      --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
-      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.06);
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --shadow-card: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang TC", "Noto Sans TC", "Segoe UI", Roboto, sans-serif; }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "PingFang TC", "Noto Sans TC", sans-serif; }
     body { background-color: var(--bg); color: var(--text-main); display: flex; justify-content: center; }
     
     .app-container { width: 100%; max-width: 440px; min-height: 100vh; background: #F8FAFC; position: relative; padding-bottom: 95px; box-shadow: 0 0 40px rgba(0,0,0,0.08); }
 
-    /* 頂部 Hero 封面 */
+    /* 頂部 Hero 封面區 */
     .hero-banner {
       position: relative;
-      padding: env(safe-area-inset-top, 42px) 20px 24px;
-      background: linear-gradient(180deg, rgba(15, 23, 42, 0.45) 0%, rgba(15, 23, 42, 0.88) 100%), url('https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=900&auto=format&fit=crop&q=80') center/cover no-repeat;
+      padding: env(safe-area-inset-top, 42px) 20px 22px;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0.88) 100%), url('https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=900&auto=format&fit=crop&q=80') center/cover no-repeat;
       color: #FFFFFF;
       text-align: center;
       border-radius: 0 0 24px 24px;
-      overflow: hidden;
     }
     .hero-tools { position: absolute; top: env(safe-area-inset-top, 16px); right: 16px; display: flex; gap: 8px; }
     .hero-btn { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; cursor: pointer; backdrop-filter: blur(8px); }
     .hero-title { font-size: 21px; font-weight: 900; letter-spacing: 0.5px; margin-bottom: 6px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
-    .hero-meta { font-size: 12px; opacity: 0.95; font-weight: 600; letter-spacing: 0.3px; }
+    .hero-meta { font-size: 12px; opacity: 0.95; font-weight: 600; }
     .countdown-pill { display: inline-flex; align-items: center; gap: 4px; background: rgba(255,255,255,0.22); padding: 4px 12px; border-radius: 20px; font-size: 11px; margin-top: 8px; font-weight: 800; border: 1px solid rgba(255,255,255,0.25); backdrop-filter: blur(4px); }
 
-    /* 天數選擇列 (Day Pills) */
+    /* 天數選擇列 (Day Carousel) */
     .day-bar { display: flex; gap: 8px; padding: 12px 14px; background: #FFFFFF; overflow-x: auto; border-bottom: 1px solid var(--border); }
     .day-bar::-webkit-scrollbar { display: none; }
     .day-card {
-      min-width: 52px;
-      padding: 9px 8px;
+      min-width: 54px;
+      padding: 8px 6px;
       border-radius: 14px;
       background: #F8FAFC;
-      border: 1px solid #E2E8F0;
+      border: 1.5px solid transparent;
       text-align: center;
       cursor: pointer;
       flex-shrink: 0;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.2s;
     }
-    .day-card.active { background: #E0EFF7; border-color: #0F52BA; transform: translateY(-2px); box-shadow: var(--shadow-sm); }
-    .day-num { font-size: 15px; font-weight: 900; color: #0F52BA; line-height: 1; }
+    .day-card.active { background: #E0F2FE; border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(2,132,199,0.15); }
+    .day-num { font-size: 15px; font-weight: 900; color: var(--primary); line-height: 1; }
     .day-date { font-size: 10px; color: var(--text-sub); margin-top: 4px; font-weight: 700; }
 
     /* 主頁面內容區 */
@@ -67,67 +70,134 @@
     .tab-pane { display: none; }
     .tab-pane.active { display: block; }
 
-    /* Bento 卡片樣式 */
-    .bento-card { background: var(--card-bg); border-radius: 18px; padding: 18px; margin-bottom: 14px; box-shadow: var(--shadow-sm); border: 1px solid var(--border); position: relative; }
-    .bento-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-    .bento-title { font-size: 16px; font-weight: 900; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
-    .btn-action { background: #EFF6FF; color: var(--primary); border: 1px solid #BFDBFE; padding: 5px 12px; border-radius: 10px; font-size: 11px; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
+    /* 區塊 Header */
+    .section-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .section-title { font-size: 16px; font-weight: 900; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
+    .btn-add { background: var(--primary-soft); color: var(--primary); border: 1px solid #BAE6FD; padding: 5px 12px; border-radius: 10px; font-size: 11.5px; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
 
-    /* 景點卡片清單 */
-    .spot-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid #F1F5F9; }
-    .spot-item:last-child { border-bottom: none; }
-    .spot-badge { background: #E2E8F0; color: #475569; font-size: 10px; font-weight: 900; padding: 3px 7px; border-radius: 6px; height: fit-content; margin-top: 2px; }
-    .spot-info { flex: 1; }
-    .spot-name-row { display: flex; justify-content: space-between; align-items: flex-start; }
-    .spot-name { font-size: 15px; font-weight: 900; color: #0F52BA; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
-    .spot-desc { font-size: 12px; color: var(--text-sub); margin-top: 4px; line-height: 1.5; }
-    .spot-tools { display: flex; gap: 6px; margin-top: 8px; }
-    .tool-btn { background: #F1F5F9; border: none; font-size: 11px; padding: 3px 9px; border-radius: 6px; color: var(--text-sub); cursor: pointer; font-weight: 700; }
+    /* ==================== 📍 旗艦級時間軸與景點卡片 ==================== */
+    .timeline-container { position: relative; padding-left: 20px; }
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 14px;
+      bottom: 24px;
+      width: 2px;
+      background: #CBD5E1;
+      border-radius: 2px;
+    }
 
-    /* 🏨 住宿卡片 */
-    .hotel-name { font-size: 16px; font-weight: 900; color: #0F52BA; }
-    .hotel-price { font-size: 15px; font-weight: 900; color: var(--gold); }
-    .hotel-nav-btn { display: inline-flex; align-items: center; gap: 5px; background: linear-gradient(135deg, #2563EB, #1D4ED8); color: #FFFFFF; font-size: 12px; font-weight: 800; padding: 7px 16px; border-radius: 24px; text-decoration: none; margin-top: 10px; box-shadow: 0 2px 8px rgba(37,99,235,0.3); }
+    .timeline-node { position: relative; margin-bottom: 16px; }
+    .timeline-dot {
+      position: absolute;
+      left: -20px;
+      top: 16px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      border: 3px solid var(--primary);
+      box-shadow: 0 0 0 3px rgba(2,132,199,0.2);
+      z-index: 2;
+    }
 
-    /* ✈️ 航班機票登機證卡片 (Bento 旗艦設計) */
-    .flight-boarding-pass {
-      background: linear-gradient(145deg, #1E293B, #0F172A);
+    /* 景點主卡片 */
+    .spot-card-pro {
+      background: #FFFFFF;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      border: 1px solid #E2E8F0;
+      transition: transform 0.2s;
+    }
+    .spot-cover-wrap { position: relative; height: 120px; background: #E2E8F0; cursor: pointer; overflow: hidden; }
+    .spot-cover-img { width: 100%; height: 100%; object-fit: cover; }
+    .spot-photo-badge { position: absolute; bottom: 8px; right: 8px; background: rgba(15,23,42,0.75); color: #fff; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 20px; backdrop-filter: blur(4px); }
+    .spot-tag-floating { position: absolute; top: 8px; left: 8px; background: rgba(255,255,255,0.92); color: var(--text-main); font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    
+    .spot-body-pro { padding: 14px; }
+    .spot-title-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+    .spot-title-pro { font-size: 16px; font-weight: 900; color: #0F172A; text-decoration: none; line-height: 1.3; }
+    .spot-rating-tag { background: #FEF3C7; color: #B45309; font-size: 10px; font-weight: 900; padding: 2px 6px; border-radius: 5px; white-space: nowrap; }
+    .spot-sub-desc { font-size: 12px; color: var(--text-sub); margin-top: 5px; line-height: 1.45; }
+    
+    .spot-meta-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; padding-top: 8px; border-top: 1px solid #F1F5F9; font-size: 11px; color: var(--text-sub); }
+    .spot-meta-item { display: inline-flex; align-items: center; gap: 3px; background: #F8FAFC; padding: 3px 7px; border-radius: 6px; border: 1px solid #F1F5F9; }
+
+    .spot-actions-pro { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
+    .btn-nav-mini { background: linear-gradient(135deg, #0284C7, #0369A1); color: #fff; border: none; padding: 6px 12px; border-radius: 10px; font-size: 11.5px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 2px 6px rgba(2,132,199,0.25); }
+    .action-pill-group { display: flex; gap: 4px; }
+    .pill-btn { background: #F1F5F9; border: 1px solid #E2E8F0; width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 11px; color: var(--text-sub); }
+
+    /* 交通接駁條 (Transit Connector) */
+    .transit-connector {
+      margin: 12px 0 12px 6px;
+      padding: 6px 10px;
+      background: #F8FAFC;
+      border: 1px dashed #CBD5E1;
+      border-radius: 8px;
+      font-size: 11px;
+      color: var(--text-sub);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ==================== 🏨 頂級飯店卡 ==================== */
+    .hotel-card-pro {
+      background: #FFFFFF;
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 16px;
+      border: 1px solid #E2E8F0;
+      box-shadow: var(--shadow-card);
+      position: relative;
+    }
+    .hotel-header-pro { display: flex; justify-content: space-between; align-items: center; }
+    .hotel-title-pro { font-size: 16px; font-weight: 900; color: #0F172A; }
+    .hotel-price-badge { font-size: 14px; font-weight: 900; color: var(--gold); background: var(--gold-bg); padding: 3px 8px; border-radius: 8px; }
+    .hotel-meta-row { font-size: 12px; color: var(--text-sub); margin: 8px 0 12px; display: flex; gap: 10px; }
+    .hotel-btns-row { display: flex; gap: 8px; }
+    .hotel-nav-main { flex: 1; background: linear-gradient(135deg, #0284C7, #0369A1); color: #fff; text-decoration: none; padding: 8px; border-radius: 10px; font-size: 12px; font-weight: 800; text-align: center; display: flex; align-items: center; justify-content: center; gap: 4px; }
+
+    /* ==================== 📋 當日待辦清單 ==================== */
+    .todo-box-pro { background: #FFFFFF; border-radius: 18px; padding: 16px; margin-bottom: 16px; border: 1px solid #E2E8F0; box-shadow: var(--shadow-card); }
+    .todo-row-pro { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid #F1F5F9; }
+    .todo-row-pro:last-child { border-bottom: none; }
+    .todo-check-custom { width: 20px; height: 20px; accent-color: var(--green); cursor: pointer; border-radius: 6px; }
+    .todo-text-pro { font-size: 13.5px; color: var(--text-main); flex: 1; font-weight: 600; }
+    .todo-text-pro.done { text-decoration: line-through; color: var(--text-muted); }
+
+    /* ==================== ✈️ 航班卡片 ==================== */
+    .flight-pass {
+      background: linear-gradient(145deg, #0F172A, #1E293B);
       border-radius: 20px;
       color: #FFFFFF;
       padding: 20px;
-      margin-bottom: 14px;
-      box-shadow: 0 10px 25px rgba(15,23,42,0.18);
-      position: relative;
+      margin-bottom: 16px;
+      box-shadow: 0 10px 25px rgba(15,23,42,0.15);
     }
-    .flight-pass-header { display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 800; letter-spacing: 0.5px; opacity: 0.85; }
-    .flight-status-badge { background: #10B981; color: #fff; padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 900; }
-    .flight-route-grid { display: flex; justify-content: space-between; align-items: center; margin: 16px 0; }
-    .airport-code { font-size: 26px; font-weight: 900; letter-spacing: 1px; }
-    .airport-city { font-size: 12px; opacity: 0.75; margin-top: 2px; }
-    .flight-plane-icon { font-size: 20px; color: #60A5FA; }
-    .flight-divider { height: 1px; border-top: 1px dashed rgba(255,255,255,0.25); margin: 12px 0; }
-    .flight-detail-grid { display: flex; justify-content: space-between; font-size: 12px; }
-    .flight-detail-item b { display: block; font-size: 14px; margin-top: 2px; font-weight: 900; color: #93C5FD; }
-    .flight-query-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
-    .flight-link-btn { background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.2); text-decoration: none; padding: 8px; border-radius: 10px; font-size: 11px; font-weight: 800; text-align: center; backdrop-filter: blur(6px); }
+    .flight-pass-top { display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 800; opacity: 0.9; }
+    .flight-status { background: #10B981; color: #fff; padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 900; }
+    .flight-route { display: flex; justify-content: space-between; align-items: center; margin: 16px 0; }
+    .airport-code { font-size: 26px; font-weight: 900; }
+    .airport-name { font-size: 11px; opacity: 0.7; margin-top: 2px; }
+    .flight-time { font-size: 14px; font-weight: 800; color: #38BDF8; margin-top: 4px; }
+    .flight-grid { display: flex; justify-content: space-between; border-top: 1px dashed rgba(255,255,255,0.2); padding-top: 12px; font-size: 11.5px; }
+    .flight-grid b { display: block; font-size: 14px; color: #7DD3FC; margin-top: 2px; }
+    .flight-links { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+    .flight-query-btn { background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.2); text-decoration: none; padding: 8px; border-radius: 10px; font-size: 11px; font-weight: 800; text-align: center; backdrop-filter: blur(6px); }
 
-    /* 📋 待辦與行李清單 */
-    .todo-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #F1F5F9; }
-    .todo-item:last-child { border-bottom: none; }
-    .todo-checkbox { width: 19px; height: 19px; accent-color: var(--green); cursor: pointer; border-radius: 6px; }
-    .todo-text { font-size: 13.5px; color: var(--text-main); flex: 1; font-weight: 600; }
-    .todo-text.done { text-decoration: line-through; color: #94A3B8; }
-
-    /* 進度條 */
+    /* ==================== 🧳 行李與預算 ==================== */
+    .bento-card { background: #FFFFFF; border-radius: 18px; padding: 16px; margin-bottom: 16px; border: 1px solid #E2E8F0; box-shadow: var(--shadow-card); }
     .progress-bar-bg { background: #E2E8F0; border-radius: 10px; height: 8px; width: 100%; overflow: hidden; margin-bottom: 14px; }
-    .progress-bar-fill { background: linear-gradient(90deg, #10B981, #059669); height: 100%; width: 0%; transition: width 0.3s ease; }
+    .progress-bar-fill { background: linear-gradient(90deg, #10B981, #059669); height: 100%; width: 0%; transition: width 0.3s; }
+    .budget-banner { background: linear-gradient(135deg, #0284C7, #0369A1); color: #fff; border-radius: 18px; padding: 20px; margin-bottom: 16px; box-shadow: 0 4px 16px rgba(2,132,199,0.2); }
 
-    /* 👛 預算卡片 */
-    .budget-banner { background: linear-gradient(135deg, #0F52BA, #1D4ED8); color: #fff; border-radius: 18px; padding: 20px; margin-bottom: 14px; box-shadow: 0 4px 16px rgba(15,82,186,0.2); }
-
-    /* 日文翻譯字卡 */
+    /* 日文翻譯卡 */
     .trans-card { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; }
-    .trans-zh { font-size: 13px; font-weight: 800; color: #0F52BA; margin-bottom: 4px; }
+    .trans-zh { font-size: 13px; font-weight: 800; color: var(--primary); margin-bottom: 4px; }
     .trans-jp { font-size: 16px; font-weight: 900; color: #0F172A; }
     .trans-romaji { font-size: 11px; color: var(--text-sub); margin-top: 3px; }
 
@@ -158,7 +228,7 @@
       cursor: pointer;
       flex: 1;
     }
-    .nav-tab.active { color: #0F52BA; }
+    .nav-tab.active { color: var(--primary); }
     .nav-tab-icon { font-size: 19px; }
 
     /* 彈窗樣式 */
@@ -169,9 +239,9 @@
     .form-group { margin-bottom: 13px; }
     .form-label { display: block; font-size: 12px; font-weight: 800; color: var(--text-sub); margin-bottom: 5px; }
     .form-input { width: 100%; padding: 11px 13px; border: 1px solid var(--border); border-radius: 10px; font-size: 13.5px; outline: none; background: #F8FAFC; }
-    .form-input:focus { border-color: #0F52BA; background: #fff; }
+    .form-input:focus { border-color: var(--primary); background: #fff; }
     .form-row { display: flex; gap: 8px; }
-    .submit-btn { width: 100%; background: #0F52BA; color: #fff; padding: 13px; border: none; border-radius: 12px; font-size: 15px; font-weight: 900; cursor: pointer; margin-top: 10px; box-shadow: 0 4px 12px rgba(15,82,186,0.25); }
+    .submit-btn { width: 100%; background: var(--primary); color: #fff; padding: 13px; border: none; border-radius: 12px; font-size: 15px; font-weight: 900; cursor: pointer; margin-top: 10px; box-shadow: 0 4px 12px rgba(2,132,199,0.25); }
   </style>
 </head>
 <body>
@@ -181,10 +251,10 @@
     <!-- 頂部 Hero 封面區 -->
     <div class="hero-banner" id="heroBanner">
       <div class="hero-tools">
-        <button class="hero-btn" onclick="exportData()">📤 分享備份</button>
-        <button class="hero-btn" onclick="openModal('metaModal')">✏️ 編輯旅程</button>
+        <button class="hero-btn" onclick="exportData()">📤 分享</button>
+        <button class="hero-btn" onclick="openModal('metaModal')">✏️ 編輯</button>
       </div>
-      <div class="hero-title" id="dispTitle">我的專屬旅遊計畫</div>
+      <div class="hero-title" id="dispTitle">我的專屬旅遊指南</div>
       <div class="hero-meta" id="dispMeta">2026/10/28 - 11/02 ｜ 6天5夜 ｜ 2人同行</div>
       <div class="countdown-pill" id="dispCountdown">⏳ 計算出發倒數中...</div>
     </div>
@@ -194,96 +264,95 @@
 
     <div class="content">
 
-      <!-- 分頁 1: 行程 (Itinerary) -->
+      <!-- ==================== 分頁 1: 旗艦時間軸行程 (Itinerary) ==================== -->
       <div id="tab-itinerary" class="tab-pane active">
         
-        <!-- 當日景點清單 -->
-        <div class="bento-card">
-          <div class="bento-header">
-            <div class="bento-title">📍 當日景點 · 美食探索</div>
-            <button class="btn-action" onclick="openModal('spotModal')">➕ 新增行程點</button>
-          </div>
-          <div id="spotList"></div>
+        <div class="section-head">
+          <div class="section-title">📍 當日景點 · 美食探索</div>
+          <button class="btn-add" onclick="openModal('spotModal')">➕ 新增行程點</button>
         </div>
 
-        <!-- 🏨 當日住宿 -->
-        <div class="bento-card">
-          <div class="bento-header" style="margin-bottom:8px;">
-            <div class="bento-title">🏨 當日住宿安排</div>
-            <button class="btn-action" onclick="openModal('hotelModal')">✏️ 修改住宿</button>
+        <!-- 景點時間軸容器 -->
+        <div class="timeline-container" id="spotTimelineList"></div>
+
+        <!-- 🏨 住宿安排 -->
+        <div class="section-head" style="margin-top:20px;">
+          <div class="section-title">🏨 當日住宿</div>
+          <button class="btn-add" onclick="openModal('hotelModal')">✏️ 編輯住宿</button>
+        </div>
+        <div class="hotel-card-pro">
+          <div class="hotel-header-pro">
+            <div class="hotel-title-pro" id="dispHotelName">尚未設定住宿</div>
+            <div class="hotel-price-badge" id="dispHotelPrice">--</div>
           </div>
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <div class="hotel-name" id="dispHotelName">尚未設定住宿</div>
-            <div class="hotel-price" id="dispHotelPrice">--</div>
+          <div class="hotel-meta-row">
+            <span>🕒 Check-in 15:00</span>
+            <span>🔑 預約確認完畢</span>
           </div>
-          <a href="#" id="dispHotelLink" target="_blank" class="hotel-nav-btn">
-            🧭 路線定位與導航 ↗
-          </a>
+          <div class="hotel-btns-row">
+            <a href="#" id="dispHotelLink" target="_blank" class="hotel-nav-main">🧭 Google Maps 導航前往</a>
+          </div>
         </div>
 
         <!-- 📋 當日待辦事項 -->
-        <div class="bento-card">
-          <div class="bento-header">
-            <div class="bento-title">📋 當日待辦備忘</div>
-            <button class="btn-action" onclick="addTodoPrompt()">➕ 加備忘</button>
-          </div>
-          <div id="todoList"></div>
+        <div class="section-head" style="margin-top:20px;">
+          <div class="section-title">📋 當日待辦備忘</div>
+          <button class="btn-add" onclick="addTodoPrompt()">➕ 加備忘</button>
         </div>
+        <div class="todo-box-pro" id="todoList"></div>
 
       </div>
 
-      <!-- 分頁 2: 總覽與航班 (Overview & Flights) -->
+      <!-- ==================== 分頁 2: 總覽與航班 (Overview & Flights) ==================== -->
       <div id="tab-overview" class="tab-pane">
         
-        <!-- ✈️ 航班動態與即時查詢卡片 -->
-        <div class="flight-boarding-pass">
-          <div class="flight-pass-header">
+        <div class="section-head">
+          <div class="section-title">✈️ 航班動態查詢</div>
+          <button class="btn-add" onclick="openModal('flightModal')">✏️ 修改航班</button>
+        </div>
+
+        <div class="flight-pass">
+          <div class="flight-pass-top">
             <span id="fAirlineNo">長榮航空 BR 198</span>
-            <span class="flight-status-badge">準點 ON TIME</span>
+            <span class="flight-status">準點 ON TIME</span>
           </div>
 
-          <div class="flight-route-grid">
+          <div class="flight-route">
             <div>
               <div class="airport-code" id="fDeptCode">TPE</div>
-              <div class="airport-city" id="fDeptCity">台北桃園 T2</div>
-              <div style="font-size:14px; font-weight:800; margin-top:4px;" id="fDeptTime">08:50</div>
+              <div class="airport-name" id="fDeptCity">台北桃園 T2</div>
+              <div class="flight-time" id="fDeptTime">08:50</div>
             </div>
             <div style="text-align:center;">
-              <span class="flight-plane-icon">✈️</span>
+              <span style="font-size:22px; color:#38BDF8;">✈️</span>
               <div style="font-size:10px; opacity:0.6; margin-top:2px;" id="fDuration">3h 25m</div>
             </div>
             <div style="text-align:right;">
               <div class="airport-code" id="fArrCode">NRT</div>
-              <div class="airport-city" id="fArrCity">東京成田 T1</div>
-              <div style="font-size:14px; font-weight:800; margin-top:4px;" id="fArrTime">13:15</div>
+              <div class="airport-name" id="fArrCity">東京成田 T1</div>
+              <div class="flight-time" id="fArrTime">13:15</div>
             </div>
           </div>
 
-          <div class="flight-divider"></div>
-
-          <div class="flight-detail-grid">
-            <div class="flight-detail-item">登機門<b id="fGate">B6</b></div>
-            <div class="flight-detail-item">座位<b id="fSeat">24K</b></div>
-            <div class="flight-detail-item">行李轉盤<b id="fBaggage">6 號</b></div>
+          <div class="flight-grid">
+            <div>登機門<b id="fGate">B6</b></div>
+            <div>座位<b id="fSeat">24K</b></div>
+            <div>行李轉盤<b id="fBaggage">6 號</b></div>
           </div>
 
-          <!-- 即時查詢外部按鈕 -->
-          <div class="flight-query-btns">
-            <a href="#" id="linkFlightRadar" target="_blank" class="flight-link-btn">📡 Flightradar24 雷達</a>
-            <a href="#" id="linkGoogleFlight" target="_blank" class="flight-link-btn">🔍 Google 航班動態</a>
+          <div class="flight-links">
+            <a href="#" id="linkFlightRadar" target="_blank" class="flight-query-btn">📡 Flightradar24 即時雷達</a>
+            <a href="#" id="linkGoogleFlight" target="_blank" class="flight-query-btn">🔍 Google 航班動態</a>
           </div>
         </div>
 
-        <button class="btn-action" style="width:100%; padding:10px; justify-content:center; margin-bottom:14px;" onclick="openModal('flightModal')">✏️ 查詢 / 更換航班編號</button>
-
-        <!-- 旅程備忘 -->
         <div class="bento-card">
-          <div class="bento-title" style="margin-bottom:8px;">🗺️ 旅程隨身備忘</div>
-          <textarea id="tripNotes" class="form-input" style="height:90px; resize:none;" placeholder="記錄 Wi-Fi 機取件編號、雙幣卡開卡資訊、重要提醒..." onchange="saveTripNotes(this.value)"></textarea>
+          <div class="section-title" style="margin-bottom:8px;">🗺️ 隨身重要備忘</div>
+          <textarea id="tripNotes" class="form-input" style="height:90px; resize:none;" placeholder="記錄 Wi-Fi 機取件代碼、日本雙幣卡資訊..." onchange="saveTripNotes(this.value)"></textarea>
         </div>
 
         <div class="bento-card">
-          <div class="bento-title" style="margin-bottom:8px;">🚨 日本緊急求助電話</div>
+          <div class="section-title" style="margin-bottom:8px;">🚨 日本緊急求助電話</div>
           <div style="font-size:12.5px; color:var(--text-sub); line-height:1.7;">
             • 報警：110 ｜ 救護車/火警：119<br>
             • 台北駐日經濟文化代表處：+81-3-3280-7811<br>
@@ -293,54 +362,51 @@
 
       </div>
 
-      <!-- 分頁 3: 準備 (Prep) -->
+      <!-- ==================== 分頁 3: 準備 (Prep) ==================== -->
       <div id="tab-prep" class="tab-pane">
         <div class="bento-card">
-          <div class="bento-header">
-            <div class="bento-title">🧳 行前裝備與行李打包</div>
+          <div class="section-head">
+            <div class="section-title">🧳 行前行李打包清單</div>
             <span style="font-size:12px; font-weight:900; color:var(--green);" id="packPercent">0%</span>
           </div>
           <div class="progress-bar-bg">
             <div class="progress-bar-fill" id="packBarFill"></div>
           </div>
-          <button class="btn-action" style="width:100%; justify-content:center; padding:9px; margin-bottom:14px;" onclick="addPrepPrompt()">➕ 新增裝備物品</button>
+          <button class="btn-add" style="width:100%; justify-content:center; padding:9px; margin-bottom:14px;" onclick="addPrepPrompt()">➕ 新增裝備物品</button>
           <div id="prepList"></div>
         </div>
       </div>
 
-      <!-- 分頁 4: 預算 (Budget) -->
+      <!-- ==================== 分頁 4: 預算 (Budget) ==================== -->
       <div id="tab-budget" class="tab-pane">
         <div class="budget-banner">
           <div style="font-size:12px; opacity:0.85; font-weight:800;">總累計支出 (日圓 JPY)</div>
-          <div style="font-size:30px; font-weight:900; margin:4px 0;" id="totalBudget">¥ 0</div>
+          <div style="font-size:32px; font-weight:900; margin:4px 0;" id="totalBudget">¥ 0</div>
           <div style="font-size:12.5px; opacity:0.9;" id="totalBudgetTWD">約合 NT$ 0 元</div>
         </div>
 
         <div class="bento-card">
-          <div class="bento-header">
-            <div class="bento-title">💱 即時日幣 ➔ 台幣換算</div>
-          </div>
+          <div class="section-title" style="margin-bottom:10px;">💱 即時匯率換算 (日圓 ➔ 台幣)</div>
           <div style="display:flex; align-items:center; gap:8px;">
             <input type="number" id="calcJPY" class="form-input" style="flex:1;" placeholder="輸入日幣金額 (¥)" oninput="calcRate(this.value)">
-            <span style="font-size:14px; font-weight:900; color:#0F52BA;" id="calcResult">➔ NT$ 0</span>
+            <span style="font-size:14px; font-weight:900; color:var(--primary);" id="calcResult">➔ NT$ 0</span>
           </div>
         </div>
 
         <div class="bento-card">
-          <div class="bento-header">
-            <div class="bento-title">👛 消費明細記錄</div>
-            <button class="btn-action" onclick="openModal('budgetModal')">➕ 記一筆</button>
+          <div class="section-head">
+            <div class="section-title">👛 消費明細記錄</div>
+            <button class="btn-add" onclick="openModal('budgetModal')">➕ 記一筆</button>
           </div>
           <div id="expenseList"></div>
         </div>
       </div>
 
-      <!-- 分頁 5: 連結 & 買票日文 (Links & Translate) -->
+      <!-- ==================== 分頁 5: 連結 & 日文 (Links & Translate) ==================== -->
       <div id="tab-links" class="tab-pane">
         
-        <!-- 買票/點餐日文對照卡片 -->
         <div class="bento-card">
-          <div class="bento-title" style="margin-bottom:12px;">🗣️ 買票 · 點餐實用日文卡片</div>
+          <div class="section-title" style="margin-bottom:12px;">🗣️ 買票 · 點餐實用日文卡片</div>
           <div class="trans-card">
             <div class="trans-zh">我要買兩張車票到目的地</div>
             <div class="trans-jp">切符を2枚ください。</div>
@@ -364,9 +430,9 @@
         </div>
 
         <div class="bento-card">
-          <div class="bento-header">
-            <div class="bento-title">🔗 官方票券與實用連結</div>
-            <button class="btn-action" onclick="addLinkPrompt()">➕ 新增連結</button>
+          <div class="section-head">
+            <div class="section-title">🔗 官方票券與實用連結</div>
+            <button class="btn-add" onclick="addLinkPrompt()">➕ 新增連結</button>
           </div>
           <div id="linksList"></div>
         </div>
@@ -386,6 +452,9 @@
 
   </div>
 
+  <!-- 隱藏的景點相片上傳器 -->
+  <input type="file" id="spotPhotoUpload" accept="image/*" style="display:none;" onchange="handleSpotPhotoUploaded(event)">
+
   <!-- 彈窗 1：編輯旅程資訊 -->
   <div class="modal" id="metaModal">
     <div class="modal-box">
@@ -395,7 +464,7 @@
         <input class="form-input" id="inpTitle">
       </div>
       <div class="form-group">
-        <label class="form-label">旅行起訖日期 (自動計算幾天幾夜)</label>
+        <label class="form-label">旅行起訖日期 (自動計算天數與日期)</label>
         <div class="form-row">
           <input type="date" class="form-input" id="inpStartDate">
           <input type="date" class="form-input" id="inpEndDate">
@@ -406,7 +475,7 @@
         <input class="form-input" id="inpPeople" placeholder="例如：2人同行 ❄️">
       </div>
       <div class="form-group">
-        <label class="form-label">更換封面大圖 (上傳檔案或貼上網址)</label>
+        <label class="form-label">更換封面大圖 (上傳照片或貼上網址)</label>
         <input class="form-input" id="inpCoverUrl" placeholder="請輸入圖片網址 (https://...)">
         <input type="file" id="coverFileInput" accept="image/*" style="margin-top:6px; font-size:11px;" onchange="handleCoverUpload(event)">
       </div>
@@ -419,7 +488,7 @@
     <div class="modal-box">
       <div class="modal-title">✨ 新增行程點 · 美食</div>
       <div class="form-group">
-        <label class="form-label">標籤 (例如：候選、必吃、景點、交通)</label>
+        <label class="form-label">標籤 (例如：候選、必吃、景點、購物)</label>
         <input class="form-input" id="inpSpotBadge" value="候選">
       </div>
       <div class="form-group">
@@ -429,6 +498,10 @@
       <div class="form-group">
         <label class="form-label">說明 / 價格 / 營業時間</label>
         <input class="form-input" id="inpSpotDesc" placeholder="手打蕎麥、中華そば ¥1,000 · 10:00-15:00">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Google 評分 (例如：4.8 ★)</label>
+        <input class="form-input" id="inpSpotRating" value="4.8 ★">
       </div>
       <button class="submit-btn" onclick="saveSpot()">加入行程清單</button>
     </div>
@@ -513,7 +586,7 @@
   </div>
 
   <script>
-    // --- 核心資料庫 (LocalStorage 持久化) ---
+    // --- 核心資料庫 (旗艦版) ---
     let appData = {
       title: "2026 日本藏王滑雪 + 東京自由行 ❄️",
       startDate: "2026-10-28",
@@ -542,11 +615,23 @@
           date: "10/28",
           hotel: { name: "新宿格拉斯麗飯店 (哥吉拉)", price: "$15,200 / 2晚" },
           spots: [
-            { badge: "抵達", name: "成田機場 T2 ➔ 新宿市區", desc: "搭乘 Skyliner 前往飯店辦理入住" },
-            { badge: "候選", name: "SHIBUYA SKY 展望台", desc: "夕陽入場券 · 14F 入口報到" }
+            {
+              badge: "抵達",
+              name: "成田機場 T2 ➔ 新宿市區",
+              desc: "搭乘 Skyliner / N'EX 前往飯店辦理 Check-in",
+              rating: "交通",
+              photo: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=600"
+            },
+            {
+              badge: "候選",
+              name: "SHIBUYA SKY 展望台",
+              desc: "夕陽入場券 · 14F 入口報到 · 俯瞰東京鐵塔與富士山",
+              rating: "4.8 ★",
+              photo: "https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=600"
+            }
           ],
           todos: [
-            { text: "領取實體西瓜卡 / 開通 eSIM", done: true },
+            { text: "領取實體西瓜卡 / 開通 eSIM 網卡", done: true },
             { text: "飯店櫃檯寄放大件行李", done: false }
           ]
         },
@@ -555,11 +640,23 @@
           date: "10/29",
           hotel: { name: "新宿格拉斯麗飯店", price: "續住" },
           spots: [
-            { badge: "候選", name: "明治神宮 & 原宿散策", desc: "參拜拍照 · 竹下通可麗餅" },
-            { badge: "必吃", name: "挽肉與米 (澀谷店)", desc: "手作漢堡排定食 · 需提早領整理券" }
+            {
+              badge: "必訪",
+              name: "明治神宮 & 原宿散策",
+              desc: "林蔭步道參拜拍照 · 原宿竹下通排隊可麗餅",
+              rating: "4.7 ★",
+              photo: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=600"
+            },
+            {
+              badge: "必吃",
+              name: "挽肉與米 (澀谷店)",
+              desc: "手作碳烤漢堡排定食 ¥1,800 · 需提早領取當日整理券",
+              rating: "4.6 ★",
+              photo: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600"
+            }
           ],
           todos: [
-            { text: "購買前往河口湖之高速巴士票", done: false }
+            { text: "購買明日前往河口湖之高速巴士票", done: false }
           ]
         }
       ],
@@ -585,13 +682,13 @@
     };
 
     function loadApp() {
-      const saved = localStorage.getItem("travel_flagship_app");
+      const saved = localStorage.getItem("travel_pro_timeline_app");
       if (saved) appData = JSON.parse(saved);
       render();
     }
 
     function saveApp() {
-      localStorage.setItem("travel_flagship_app", JSON.stringify(appData));
+      localStorage.setItem("travel_pro_timeline_app", JSON.stringify(appData));
       render();
     }
 
@@ -627,10 +724,77 @@
       document.getElementById("dispMeta").innerText = trip.summary;
       document.getElementById("dispCountdown").innerText = trip.countdown;
       if (appData.coverImg) {
-        document.getElementById("heroBanner").style.backgroundImage = `linear-gradient(180deg, rgba(15, 23, 42, 0.45) 0%, rgba(15, 23, 42, 0.88) 100%), url('${appData.coverImg}')`;
+        document.getElementById("heroBanner").style.backgroundImage = `linear-gradient(180deg, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0.88) 100%), url('${appData.coverImg}')`;
       }
 
-      // 航班卡片渲染
+      // 天數列
+      const dayBar = document.getElementById("dayBar");
+      dayBar.innerHTML = appData.days.map((d, i) => `
+        <div class="day-card ${i === appData.activeDayIndex ? 'active' : ''}" onclick="setDay(${i})">
+          <div class="day-num">${d.num}</div>
+          <div class="day-date">${d.date}</div>
+        </div>
+      `).join('');
+
+      // ==================== 渲染旗艦時間軸行程 ====================
+      const cur = appData.days[appData.activeDayIndex] || appData.days[0];
+      const spotList = document.getElementById("spotTimelineList");
+      
+      if (!cur.spots || cur.spots.length === 0) {
+        spotList.innerHTML = '<div style="font-size:13px; color:#94A3B8; padding:16px 0;">點擊右上角「➕ 新增行程點」開始規劃當天行程！</div>';
+      } else {
+        spotList.innerHTML = cur.spots.map((s, idx) => `
+          <div class="timeline-node">
+            <div class="timeline-dot"></div>
+            <div class="spot-card-pro">
+              <!-- 封面美照 -->
+              <div class="spot-cover-wrap" onclick="triggerSpotPhoto(${idx})">
+                <img src="${s.photo || 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600'}" class="spot-cover-img">
+                <div class="spot-tag-floating">${s.badge || '景點'}</div>
+                <div class="spot-photo-badge">📷 點擊換照片</div>
+              </div>
+              
+              <div class="spot-body-pro">
+                <div class="spot-title-row">
+                  <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.name)}" target="_blank" class="spot-title-pro">${s.name} ↗</a>
+                  <span class="spot-rating-tag">${s.rating || '4.8 ★'}</span>
+                </div>
+                <div class="spot-sub-desc">${s.desc || ''}</div>
+                
+                <div class="spot-actions-pro">
+                  <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.name)}" target="_blank" class="btn-nav-mini">
+                    🧭 Google 導航
+                  </a>
+                  <div class="action-pill-group">
+                    <button class="pill-btn" onclick="moveSpot(${idx}, -1)" title="上移">⬆️</button>
+                    <button class="pill-btn" onclick="moveSpot(${idx}, 1)" title="下移">⬇️</button>
+                    <button class="pill-btn" style="color:red;" onclick="delSpot(${idx})" title="刪除">🗑️</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            ${idx < cur.spots.length - 1 ? '<div class="transit-connector">🚇 建議搭乘地鐵 / 步行前往下個地點 · 約 15 分鐘</div>' : ''}
+          </div>
+        `).join('');
+      }
+
+      // 當日住宿
+      const hotel = cur.hotel || { name: "尚未設定住宿", price: "--" };
+      document.getElementById("dispHotelName").innerText = hotel.name;
+      document.getElementById("dispHotelPrice").innerText = hotel.price;
+      document.getElementById("dispHotelLink").href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(hotel.name)}`;
+
+      // 當日待辦
+      const todoList = document.getElementById("todoList");
+      todoList.innerHTML = (cur.todos || []).map((t, idx) => `
+        <div class="todo-row-pro">
+          <input type="checkbox" class="todo-check-custom" ${t.done ? 'checked' : ''} onchange="toggleTodo(${idx})">
+          <div class="todo-text-pro ${t.done ? 'done' : ''}">${t.text}</div>
+          <span style="color:#CBD5E1; cursor:pointer; font-size:12px;" onclick="delTodo(${idx})">✕</span>
+        </div>
+      `).join('') || '<div style="font-size:12.5px; color:#94A3B8; padding:4px 0;">無待辦事項</div>';
+
+      // 航班卡片
       const fl = appData.flight || {};
       document.getElementById("fAirlineNo").innerText = fl.no || "航班未設定";
       document.getElementById("fDeptCode").innerText = fl.deptCode || "TPE";
@@ -644,60 +808,14 @@
       document.getElementById("fSeat").innerText = fl.seat || "--";
       document.getElementById("fBaggage").innerText = fl.baggage || "--";
 
-      // 航班外部查詢連結 (FlightRadar24 & Google Flights)
       const flightQuery = fl.flightCodeOnly || (fl.no ? fl.no.replace(/[^a-zA-Z0-9]/g, '') : 'BR198');
       document.getElementById("linkFlightRadar").href = `https://www.flightradar24.com/data/flights/${flightQuery.toLowerCase()}`;
       document.getElementById("linkGoogleFlight").href = `https://www.google.com/search?q=${encodeURIComponent(flightQuery + ' 航班動態')}`;
 
-      // 隨身備忘
+      // 備忘
       document.getElementById("tripNotes").value = appData.notes || "";
 
-      // 天數列
-      const dayBar = document.getElementById("dayBar");
-      dayBar.innerHTML = appData.days.map((d, i) => `
-        <div class="day-card ${i === appData.activeDayIndex ? 'active' : ''}" onclick="setDay(${i})">
-          <div class="day-num">${d.num}</div>
-          <div class="day-date">${d.date}</div>
-        </div>
-      `).join('');
-
-      // 當日行程
-      const cur = appData.days[appData.activeDayIndex] || appData.days[0];
-      const spotList = document.getElementById("spotList");
-      spotList.innerHTML = (cur.spots || []).map((s, idx) => `
-        <div class="spot-item">
-          <div class="spot-badge">${s.badge || '景點'}</div>
-          <div class="spot-info">
-            <div class="spot-name-row">
-              <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.name)}" target="_blank" class="spot-name">${s.name} ↗</a>
-              <span style="color:#CBD5E1; cursor:pointer; font-size:12px;" onclick="delSpot(${idx})">✕</span>
-            </div>
-            <div class="spot-desc">${s.desc || ''}</div>
-            <div class="spot-tools">
-              <button class="tool-btn" onclick="moveSpot(${idx}, -1)">⬆️</button>
-              <button class="tool-btn" onclick="moveSpot(${idx}, 1)">⬇️</button>
-            </div>
-          </div>
-        </div>
-      `).join('') || '<div style="font-size:12.5px; color:#94A3B8; padding:10px 0;">尚未新增當日景點</div>';
-
-      // 當日住宿
-      const hotel = cur.hotel || { name: "尚未設定住宿", price: "--" };
-      document.getElementById("dispHotelName").innerText = hotel.name;
-      document.getElementById("dispHotelPrice").innerText = hotel.price;
-      document.getElementById("dispHotelLink").href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(hotel.name)}`;
-
-      // 當日待辦
-      const todoList = document.getElementById("todoList");
-      todoList.innerHTML = (cur.todos || []).map((t, idx) => `
-        <div class="todo-item">
-          <input type="checkbox" class="todo-checkbox" ${t.done ? 'checked' : ''} onchange="toggleTodo(${idx})">
-          <div class="todo-text ${t.done ? 'done' : ''}">${t.text}</div>
-          <span style="color:#CBD5E1; cursor:pointer; font-size:11px;" onclick="delTodo(${idx})">✕</span>
-        </div>
-      `).join('') || '<div style="font-size:12.5px; color:#94A3B8; padding:10px 0;">無待辦項目</div>';
-
-      // 裝備與行李清單
+      // 行李清單
       const prepList = document.getElementById("prepList");
       const doneCount = appData.preps.filter(p => p.done).length;
       const totalCount = appData.preps.length;
@@ -706,17 +824,17 @@
       document.getElementById("packBarFill").style.width = `${percent}%`;
 
       prepList.innerHTML = appData.preps.map((p, idx) => `
-        <div class="todo-item">
-          <input type="checkbox" class="todo-checkbox" ${p.done ? 'checked' : ''} onchange="togglePrep(${idx})">
-          <div class="todo-text ${p.done ? 'done' : ''}">
+        <div class="todo-row-pro">
+          <input type="checkbox" class="todo-check-custom" ${p.done ? 'checked' : ''} onchange="togglePrep(${idx})">
+          <div class="todo-text-pro ${p.done ? 'done' : ''}">
             <span style="font-size:10px; background:#E2E8F0; color:#475569; padding:2px 5px; border-radius:4px; margin-right:4px;">${p.cat || '行李'}</span>
             ${p.text}
           </div>
-          <span style="color:#CBD5E1; cursor:pointer; font-size:11px;" onclick="delPrep(${idx})">✕</span>
+          <span style="color:#CBD5E1; cursor:pointer; font-size:12px;" onclick="delPrep(${idx})">✕</span>
         </div>
       `).join('');
 
-      // 預算花費
+      // 預算
       const totalJPY = appData.expenses.reduce((sum, item) => sum + Number(item.amount), 0);
       document.getElementById("totalBudget").innerText = `¥ ${totalJPY.toLocaleString()}`;
       document.getElementById("totalBudgetTWD").innerText = `約合 NT$ ${Math.round(totalJPY * 0.22).toLocaleString()} 元`;
@@ -725,7 +843,7 @@
         <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid #F1F5F9; font-size:13.5px;">
           <div>${e.name}</div>
           <div style="display:flex; align-items:center; gap:8px;">
-            <b style="color:#0F52BA;">¥ ${Number(e.amount).toLocaleString()}</b>
+            <b style="color:var(--primary);">¥ ${Number(e.amount).toLocaleString()}</b>
             <span style="color:#CBD5E1; cursor:pointer; font-size:11px;" onclick="delExpense(${idx})">✕</span>
           </div>
         </div>
@@ -735,7 +853,7 @@
       const linksList = document.getElementById("linksList");
       linksList.innerHTML = appData.links.map((link, idx) => `
         <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid #F1F5F9;">
-          <a href="${link.url}" target="_blank" style="color:#0F52BA; font-size:13.5px; font-weight:800; text-decoration:none;">${link.name} ↗</a>
+          <a href="${link.url}" target="_blank" style="color:var(--primary); font-size:13.5px; font-weight:800; text-decoration:none;">${link.name} ↗</a>
           <span style="color:#CBD5E1; cursor:pointer; font-size:11px;" onclick="delLink(${idx})">✕</span>
         </div>
       `).join('');
@@ -816,13 +934,18 @@
       }
     }
 
+    // 景點操作
     function saveSpot() {
       const badge = document.getElementById("inpSpotBadge").value;
       const name = document.getElementById("inpSpotName").value;
       const desc = document.getElementById("inpSpotDesc").value;
+      const rating = document.getElementById("inpSpotRating").value || "4.8 ★";
       if (!name) return alert("請輸入景點名稱");
       if (!appData.days[appData.activeDayIndex].spots) appData.days[appData.activeDayIndex].spots = [];
-      appData.days[appData.activeDayIndex].spots.push({ badge, name, desc });
+      appData.days[appData.activeDayIndex].spots.push({
+        badge, name, desc, rating,
+        photo: "https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=600"
+      });
       closeModal('spotModal'); saveApp();
     }
     function moveSpot(idx, dir) {
@@ -834,6 +957,25 @@
     }
     function delSpot(idx) { appData.days[appData.activeDayIndex].spots.splice(idx, 1); saveApp(); }
 
+    // 換景點相片
+    let editSpotIdx = null;
+    function triggerSpotPhoto(idx) {
+      editSpotIdx = idx;
+      document.getElementById('spotPhotoUpload').click();
+    }
+    function handleSpotPhotoUploaded(e) {
+      const file = e.target.files[0];
+      if (file && editSpotIdx !== null) {
+        const reader = new FileReader();
+        reader.onload = ev => {
+          appData.days[appData.activeDayIndex].spots[editSpotIdx].photo = ev.target.result;
+          saveApp();
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // 住宿操作
     function saveHotel() {
       const name = document.getElementById("inpHotelName").value;
       const price = document.getElementById("inpHotelPrice").value;
@@ -841,6 +983,7 @@
       closeModal('hotelModal'); saveApp();
     }
 
+    // 航班操作
     function saveFlight() {
       const no = document.getElementById("inpFNo").value;
       const cleanCode = no.replace(/[^a-zA-Z0-9]/g, '');
@@ -863,8 +1006,9 @@
       closeModal('flightModal'); saveApp();
     }
 
-    function saveTripNotes(val) { appData.notes = val; localStorage.setItem("travel_flagship_app", JSON.stringify(appData)); }
+    function saveTripNotes(val) { appData.notes = val; localStorage.setItem("travel_pro_timeline_app", JSON.stringify(appData)); }
 
+    // 當日待辦
     function addTodoPrompt() {
       const text = prompt("請輸入當日待辦備忘：");
       if (text) {
@@ -876,6 +1020,7 @@
     function toggleTodo(idx) { appData.days[appData.activeDayIndex].todos[idx].done = !appData.days[appData.activeDayIndex].todos[idx].done; saveApp(); }
     function delTodo(idx) { appData.days[appData.activeDayIndex].todos.splice(idx, 1); saveApp(); }
 
+    // 行李清單
     function togglePrep(idx) { appData.preps[idx].done = !appData.preps[idx].done; saveApp(); }
     function addPrepPrompt() {
       const cat = prompt("請輸入分類（例如：重要證件、衣物、電子）：", "行李");
@@ -885,6 +1030,7 @@
     }
     function delPrep(idx) { appData.preps.splice(idx, 1); saveApp(); }
 
+    // 記帳
     function saveExpense() {
       const name = document.getElementById("inpExpName").value;
       const amount = document.getElementById("inpExpAmount").value;
@@ -898,6 +1044,7 @@
       document.getElementById("calcResult").innerText = `➔ NT$ ${twd.toLocaleString()}`;
     }
 
+    // 連結
     function addLinkPrompt() {
       const name = prompt("請輸入連結名稱：");
       if (!name) return;
@@ -906,6 +1053,7 @@
     }
     function delLink(idx) { appData.links.splice(idx, 1); saveApp(); }
 
+    // 匯出分享
     function exportData() {
       navigator.clipboard.writeText(JSON.stringify(appData));
       alert("✅ 已複製整份行程備份資料！可直接傳給旅伴。");
