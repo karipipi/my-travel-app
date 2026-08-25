@@ -90,7 +90,6 @@
     /* 區塊 Header */
     .section-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
     .section-title { font-size: 16px; font-weight: 900; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
-    .head-btn-group { display: flex; gap: 6px; }
     .btn-add { background: var(--primary-soft); color: var(--primary); border: 1px solid #BAE6FD; padding: 5px 10px; border-radius: 10px; font-size: 11px; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 3px; }
 
     /* ==================== 📍 時間軸與景點卡片 ==================== */
@@ -127,7 +126,7 @@
       box-shadow: var(--shadow-card);
       border: 1px solid #E2E8F0;
     }
-    .spot-cover-wrap { position: relative; height: 110px; background: #E2E8F0; cursor: pointer; overflow: hidden; }
+    .spot-cover-wrap { position: relative; height: 120px; background: #E2E8F0; cursor: pointer; overflow: hidden; }
     .spot-cover-img { width: 100%; height: 100%; object-fit: cover; }
     .spot-photo-badge { position: absolute; bottom: 8px; right: 8px; background: rgba(15,23,42,0.75); color: #fff; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 20px; backdrop-filter: blur(4px); }
     .spot-tag-floating { position: absolute; top: 8px; left: 8px; background: rgba(255,255,255,0.92); color: var(--text-main); font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
@@ -144,7 +143,7 @@
     .action-pill-group { display: flex; gap: 4px; }
     .pill-btn { background: #F1F5F9; border: 1px solid #E2E8F0; width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 11px; color: var(--text-sub); }
 
-    /* ==================== 🚇 Japan Transit + Google 雙轉乘按鈕 ==================== */
+    /* ==================== 🚇 Japan Transit (自動喚起 App) + Google 雙轉乘按鈕 ==================== */
     .transit-box-dual {
       margin: 12px 0 12px 4px;
       padding: 10px 12px;
@@ -327,7 +326,7 @@
 
     <div class="content">
 
-      <!-- ==================== 分頁 1: 蜜月行程與雙鐵轉乘 (Itinerary) ==================== -->
+      <!-- ==================== 分頁 1: 行程 (Itinerary) ==================== -->
       <div id="tab-itinerary" class="tab-pane active">
         
         <div class="section-head">
@@ -627,7 +626,7 @@
   </div>
 
   <script>
-    // --- 100% 完整去趣蜜月行程資料庫 (2026/08/31 ~ 2026/09/09) ---
+    // --- 100% 完整去趣蜜月行程資料庫 (含每處 Google 代表實景美照) ---
     let appData = {
       title: "2026 蜜月9日遊 💕",
       startDate: "2026-08-31",
@@ -656,27 +655,27 @@
           date: "08/31",
           hotel: { name: "Vessel Inn 淺草筑波快捷飯店 (Asakusa Tsukuba Express)", price: "已預約 15:30 入住" },
           spots: [
-            { time: "00:10", badge: "出發", name: "TPE·臺灣桃園國際機場", desc: "停留 00時00分 · 啟程蜜月旅程 ✈️" },
-            { time: "04:25", badge: "抵達", name: "HND·東京國際機場(羽田機場)", desc: "停留 02時35分 · 入境與領取交通網卡" },
-            { time: "08:00", badge: "美食", name: "築地市場站", desc: "停留 02時00分 · 探索築地新鮮海味" },
-            { time: "10:08", badge: "抹茶", name: "MATCHA STAND MARUNI 東京築地", desc: "停留 01時00分 · 人氣手刷抹茶拿鐵" },
-            { time: "11:11", badge: "抹茶", name: "Matcha stand IPPUKU -wabisabi- 築地店", desc: "停留 01時00分 · 特色抹茶品嚐" },
-            { time: "12:21", badge: "名店", name: "喫茶You", desc: "停留 01時00分 · 招牌滑嫩蛋包飯" },
-            { time: "10:20", badge: "購物", name: "GINZA SIX", desc: "停留 01時45分 · 銀座奢華地標商場" },
-            { time: "12:06", badge: "甜點", name: "小楽園KIOSK", desc: "停留 00時15分 · 造型菓子" },
-            { time: "12:23", badge: "美食", name: "銀座 真田 SIX", desc: "停留 01時00分 · 信州蕎麥麵料理" },
-            { time: "14:15", badge: "奢華", name: "迪奧咖啡 by 安娜-索菲·皮克 銀座", desc: "停留 01時30分 · Cafe Dior 頂級下午茶" },
-            { time: "15:48", badge: "購物", name: "Uniqlo Ginza Flagship Store", desc: "停留 00時30分 · 銀座全球旗艦店" },
-            { time: "16:21", badge: "購物", name: "GU Ginza Store", desc: "停留 00時30分 · 日系潮流服飾" },
-            { time: "16:57", badge: "文具", name: "銀座 伊東屋 本店", desc: "停留 01時00分 · 百年質感文具大樓" },
-            { time: "18:01", badge: "購物", name: "無印良品 銀座旗艦店", desc: "停留 01時00分 · MUJI 全球旗艦店" },
-            { time: "19:01", badge: "甜品", name: "MATTE Bottega del Cioccolato", desc: "停留 01時00分 · 義式精品巧克力" },
-            { time: "15:30", badge: "飯店", name: "Vessel Inn 淺草筑波快捷飯店", desc: "停留 01時00分 · Check-in 辦理入住" },
-            { time: "16:30", badge: "甜點", name: "小樂園 TEA SALON & BOUTIQUE", desc: "停留 01時00分 · 夢幻日式洋菓子" },
-            { time: "17:30", badge: "必訪", name: "Chiikawa Bakery", desc: "停留 01時00分 · 超人氣吉伊卡哇烘焙坊" },
-            { time: "18:38", badge: "服飾", name: "NOÉMIE", desc: "停留 01時00分 · 日系地雷量產風服飾" },
-            { time: "19:39", badge: "散策", name: "Takeshita St (原宿竹下通)", desc: "停留 01時00分 · 流行商圈逛街" },
-            { time: "20:41", badge: "採買", name: "DAISO 原宿店", desc: "停留 01時00分 · 生活好物採購" }
+            { time: "00:10", badge: "出發", name: "TPE·臺灣桃園國際機場", desc: "停留 00時00分 · 啟程蜜月旅程 ✈️", photo: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600" },
+            { time: "04:25", badge: "抵達", name: "HND·東京國際機場(羽田機場)", desc: "停留 02時35分 · 入境與領取交通網卡", photo: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600" },
+            { time: "08:00", badge: "美食", name: "築地市場站", desc: "停留 02時00分 · 探索築地新鮮海味", photo: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=600" },
+            { time: "10:08", badge: "抹茶", name: "MATCHA STAND MARUNI 東京築地", desc: "停留 01時00分 · 人氣手刷抹茶拿鐵", photo: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=600" },
+            { time: "11:11", badge: "抹茶", name: "Matcha stand IPPUKU -wabisabi- 築地店", desc: "停留 01時00分 · 特色抹茶品嚐", photo: "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=600" },
+            { time: "12:21", badge: "名店", name: "喫茶You", desc: "停留 01時00分 · 招牌滑嫩蛋包飯", photo: "https://images.unsplash.com/photo-1618841557871-b4664fbf0cb3?w=600" },
+            { time: "10:20", badge: "購物", name: "GINZA SIX", desc: "停留 01時45分 · 銀座奢華地標商場", photo: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=600" },
+            { time: "12:06", badge: "甜點", name: "小楽園KIOSK", desc: "停留 00時15分 · 造型菓子", photo: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600" },
+            { time: "12:23", badge: "美食", name: "銀座 真田 SIX", desc: "停留 01時00分 · 信州蕎麥麵料理", photo: "https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=600" },
+            { time: "14:15", badge: "奢華", name: "迪奧咖啡 by 安娜-索菲·皮克 銀座", desc: "停留 01時30分 · Cafe Dior 頂級下午茶", photo: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600" },
+            { time: "15:48", badge: "購物", name: "Uniqlo Ginza Flagship Store", desc: "停留 00時30分 · 銀座全球旗艦店", photo: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600" },
+            { time: "16:21", badge: "購物", name: "GU Ginza Store", desc: "停留 00時30分 · 日系潮流服飾", photo: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600" },
+            { time: "16:57", badge: "文具", name: "銀座 伊東屋 本店", desc: "停留 01時00分 · 百年質感文具大樓", photo: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=600" },
+            { time: "18:01", badge: "購物", name: "無印良品 銀座旗艦店", desc: "停留 01時00分 · MUJI 全球旗艦店", photo: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600" },
+            { time: "19:01", badge: "甜品", name: "MATTE Bottega del Cioccolato", desc: "停留 01時00分 · 義式精品巧克力", photo: "https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600" },
+            { time: "15:30", badge: "飯店", name: "Vessel Inn 淺草筑波快捷飯店", desc: "停留 01時00分 · Check-in 辦理入住", photo: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600" },
+            { time: "16:30", badge: "甜點", name: "小樂園 TEA SALON & BOUTIQUE", desc: "停留 01時00分 · 夢幻日式洋菓子", photo: "https://images.unsplash.com/photo-1587314168485-3236d6710814?w=600" },
+            { time: "17:30", badge: "必訪", name: "Chiikawa Bakery", desc: "停留 01時00分 · 超人氣吉伊卡哇烘焙坊", photo: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600" },
+            { time: "18:38", badge: "服飾", name: "NOÉMIE", desc: "停留 01時00分 · 日系地雷量產風服飾", photo: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600" },
+            { time: "19:39", badge: "散策", name: "Takeshita St (原宿竹下通)", desc: "停留 01時00分 · 流行商圈逛街", photo: "https://images.unsplash.com/photo-1554797589-7241bb691973?w=600" },
+            { time: "20:41", badge: "採買", name: "DAISO 原宿店", desc: "停留 01時00分 · 生活好物採購", photo: "https://images.unsplash.com/photo-1526178613552-2b45c6c302f0?w=600" }
           ],
           todos: [{ text: "羽田機場開通雙人 eSIM 網卡", done: true }, { text: "飯店櫃檯確認蜜月備註", done: false }]
         },
@@ -685,16 +684,16 @@
           date: "09/01",
           hotel: { name: "Vessel Inn 淺草筑波快捷飯店", price: "續住" },
           spots: [
-            { time: "10:30", badge: "地標", name: "東京晴空塔 (TOKYO SKYTREE)", desc: "停留 01時30分 · 展望台俯瞰東京全景" },
-            { time: "12:03", badge: "景觀", name: "星巴克典藏® 東京晴空塔城30F店", desc: "停留 01時00分 · 30樓絕美景觀咖啡" },
-            { time: "13:03", badge: "飲品", name: "伊良コーラ（イヨシコーラ）浅草観音前", desc: "停留 01時00分 · 精釀手作可樂名店" },
-            { time: "14:07", badge: "神社", name: "淺草寺 (雷門·仲見世通)", desc: "停留 01時00分 · 參拜祈福求御守" },
-            { time: "15:13", badge: "老店", name: "天婦羅 三定", desc: "停留 01時00分 · 淺草百年天丼名店" },
-            { time: "16:13", badge: "抹茶", name: "Suzukien Asakusa matcha gelato (壽々喜園)", desc: "停留 01時00分 · 世界最濃 7 級抹茶冰淇淋" },
-            { time: "17:13", badge: "仙貝", name: "和泉屋 本店", desc: "停留 01時00分 · 淺草可愛貓咪仙貝" },
-            { time: "18:13", badge: "採買", name: "上野阿美橫町", desc: "停留 01時00分 · 藥妝與零食採買" },
-            { time: "19:13", badge: "咖啡", name: "LUPI COFFEE", desc: "停留 01時00分 · 質感休憩咖啡" },
-            { time: "20:13", badge: "美食", name: "淺草關東煮老店 大多福", desc: "停留 01時00分 · 百年名店溫暖宵夜" }
+            { time: "10:30", badge: "地標", name: "東京晴空塔 (TOKYO SKYTREE)", desc: "停留 01時30分 · 展望台俯瞰東京全景", photo: "https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?w=600" },
+            { time: "12:03", badge: "景觀", name: "星巴克典藏® 東京晴空塔城30F店", desc: "停留 01時00分 · 30樓絕美景觀咖啡", photo: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600" },
+            { time: "13:03", badge: "飲品", name: "伊良コーラ（イヨシコーラ）浅草観音前", desc: "停留 01時00分 · 精釀手作可樂名店", photo: "https://images.unsplash.com/photo-1527661591475-527312dd65f5?w=600" },
+            { time: "14:07", badge: "神社", name: "淺草寺 (雷門·仲見世通)", desc: "停留 01時00分 · 參拜祈福求御守", photo: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600" },
+            { time: "15:13", badge: "老店", name: "天婦羅 三定", desc: "停留 01時00分 · 淺草百年天丼名店", photo: "https://images.unsplash.com/photo-1615361200141-f45040f367be?w=600" },
+            { time: "16:13", badge: "抹茶", name: "Suzukien Asakusa matcha gelato (壽々喜園)", desc: "停留 01時00分 · 世界最濃 7 級抹茶冰淇淋", photo: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=600" },
+            { time: "17:13", badge: "仙貝", name: "和泉屋 本店", desc: "停留 01時00分 · 淺草可愛貓咪仙貝", photo: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=600" },
+            { time: "18:13", badge: "採買", name: "上野阿美橫町", desc: "停留 01時00分 · 藥妝與零食採買", photo: "https://images.unsplash.com/photo-1554797589-7241bb691973?w=600" },
+            { time: "19:13", badge: "咖啡", name: "LUPI COFFEE", desc: "停留 01時00分 · 質感休憩咖啡", photo: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600" },
+            { time: "20:13", badge: "美食", name: "淺草關東煮老店 大多福", desc: "停留 01時00分 · 百年名店溫暖宵夜", photo: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600" }
           ],
           todos: [{ text: "確認明日水上巴士直通台場時間", done: false }]
         },
@@ -703,16 +702,16 @@
           date: "09/02",
           hotel: { name: "Vessel Inn 淺草筑波快捷飯店", price: "續住" },
           spots: [
-            { time: "09:30", badge: "早餐", name: "コメダ珈琲店 浅草ROX店 (Komeda's Coffee)", desc: "停留 01時00分 · 點飲料送厚片吐司早餐" },
-            { time: "10:30", badge: "抹茶", name: "八十八良葉舍 淺草", desc: "停留 00時20分 · 京都超濃八十八抹茶" },
-            { time: "11:00", badge: "遊船", name: "TOKYO CRUISE 浅草・お台場直通ライン", desc: "停留 01時00分 · 水上巴士欣賞隅田川風光" },
-            { time: "12:00", badge: "浪漫", name: "御台場 (Odaiba)", desc: "停留 05時00分 · 富士電視台、海濱公園、自由女神" },
-            { time: "17:40", badge: "香氛", name: "SABON Shibuya Mark City", desc: "停留 00時30分 · 身體磨砂香氛挑選" },
-            { time: "18:19", badge: "咖啡", name: "RURU SHIBUYA", desc: "停留 01時00分 · 澀谷潮流咖啡" },
-            { time: "18:20", badge: "夜景", name: "澀谷 SKY (SHIBUYA SKY)", desc: "停留 01時30分 · 頂樓360度露天絕美夕陽夜景" },
-            { time: "20:00", badge: "旗艦", name: "任天堂 東京旗艦店 (Nintendo TOKYO)", desc: "停留 01時00分 · 澀谷 PARCO 6F 官方店" },
-            { time: "21:00", badge: "日系", name: "Maison de FLEUR 渋谷ヒカリエ", desc: "停留 01時00分 · 甜美緞帶包包配件" },
-            { time: "22:04", badge: "美食", name: "TsuruTonTan UDON NOODLE Brasserie SHIBUYA", desc: "停留 01時00分 · 澀谷大碗臉盆烏龍麵" }
+            { time: "09:30", badge: "早餐", name: "コメダ珈琲店 浅草ROX店 (Komeda's Coffee)", desc: "停留 01時00分 · 點飲料送厚片吐司早餐", photo: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600" },
+            { time: "10:30", badge: "抹茶", name: "八十八良葉舍 淺草", desc: "停留 00時20分 · 京都超濃八十八抹茶", photo: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=600" },
+            { time: "11:00", badge: "遊船", name: "TOKYO CRUISE 浅草・お台場直通ライン", desc: "停留 01時00分 · 水上巴士欣賞隅田川風光", photo: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600" },
+            { time: "12:00", badge: "浪漫", name: "御台場 (Odaiba)", desc: "停留 05時00分 · 富士電視台、海濱公園、自由女神", photo: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=600" },
+            { time: "17:40", badge: "香氛", name: "SABON Shibuya Mark City", desc: "停留 00時30分 · 身體磨砂香氛挑選", photo: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600" },
+            { time: "18:19", badge: "咖啡", name: "RURU SHIBUYA", desc: "停留 01時00分 · 澀谷潮流咖啡", photo: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600" },
+            { time: "18:20", badge: "夜景", name: "澀谷 SKY (SHIBUYA SKY)", desc: "停留 01時30分 · 頂樓360度露天絕美夕陽夜景", photo: "https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=600" },
+            { time: "20:00", badge: "旗艦", name: "任天堂 東京旗艦店 (Nintendo TOKYO)", desc: "停留 01時00分 · 澀谷 PARCO 6F 官方店", photo: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=600" },
+            { time: "21:00", badge: "日系", name: "Maison de FLEUR 渋谷ヒカリエ", desc: "停留 01時00分 · 甜美緞帶包包配件", photo: "https://images.unsplash.com/photo-1544816155-12df9643f363?w=600" },
+            { time: "22:04", badge: "美食", name: "TsuruTonTan UDON NOODLE Brasserie SHIBUYA", desc: "停留 01時00分 · 澀谷大碗臉盆烏龍麵", photo: "https://images.unsplash.com/photo-1618841557871-b4664fbf0cb3?w=600" }
           ],
           todos: [{ text: "整理大件行李，明日移動至立川飯店", done: false }]
         },
@@ -721,17 +720,17 @@
           date: "09/03",
           hotel: { name: "HOTEL emisia TOKYO TACHIKAWA (立川艾米西亞飯店)", price: "16:00 Check-in 入住" },
           spots: [
-            { time: "00:00", badge: "退房", name: "Vessel Inn 淺草筑波快捷飯店", desc: "停留 11時00分 · 退房移動" },
-            { time: "11:00", badge: "速食", name: "肯德基 淺草店", desc: "停留 00時00分 · 快速午餐" },
-            { time: "11:45", badge: "服飾", name: "Maison de FLEUR ルミネ池袋", desc: "停留 00時30分 · LUMINE 池袋店逛街" },
-            { time: "12:20", badge: "洋裝", name: "Amavel 池袋店", desc: "停留 01時00分 · 日系古典洋裝" },
-            { time: "13:20", badge: "樂園", name: "Chiikawa Park (吉伊卡哇樂園)", desc: "停留 02時00分 · 拍照打卡與限定周邊" },
-            { time: "16:00", badge: "飯店", name: "HOTEL emisia TOKYO TACHIKAWA", desc: "停留 01時00分 · 辦理入住放行李" },
-            { time: "17:00", badge: "服飾", name: "aimerfeel", desc: "停留 01時00分 · 內著睡衣選購" },
-            { time: "18:03", badge: "商場", name: "太陽城 (Sunshine City)", desc: "停留 01時00分 · 池袋大型複合商場" },
-            { time: "19:03", badge: "服飾", name: "Peach john", desc: "停留 01時00分 · 人氣日系居家服" },
-            { time: "20:10", badge: "服飾", name: "Amavel 新宿店", desc: "停留 01時00分 · 新宿店巡禮" },
-            { time: "21:16", badge: "美食", name: "節丸", desc: "停留 01時00分 · 美味拉麵消夜" }
+            { time: "00:00", badge: "退房", name: "Vessel Inn 淺草筑波快捷飯店", desc: "停留 11時00分 · 退房移動", photo: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600" },
+            { time: "11:00", badge: "速食", name: "肯德基 淺草店", desc: "停留 00時00分 · 快速午餐", photo: "https://images.unsplash.com/photo-1513639776629-7b61b0ac49cb?w=600" },
+            { time: "11:45", badge: "服飾", name: "Maison de FLEUR ルミネ池袋", desc: "停留 00時30分 · LUMINE 池袋店逛街", photo: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600" },
+            { time: "12:20", badge: "洋裝", name: "Amavel 池袋店", desc: "停留 01時00分 · 日系古典洋裝", photo: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600" },
+            { time: "13:20", badge: "樂園", name: "Chiikawa Park (吉伊卡哇樂園)", desc: "停留 02時00分 · 拍照打卡與限定周邊", photo: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=600" },
+            { time: "16:00", badge: "飯店", name: "HOTEL emisia TOKYO TACHIKAWA", desc: "停留 01時00分 · 辦理入住放行李", photo: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600" },
+            { time: "17:00", badge: "服飾", name: "aimerfeel", desc: "停留 01時00分 · 內著睡衣選購", photo: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600" },
+            { time: "18:03", badge: "商場", name: "太陽城 (Sunshine City)", desc: "停留 01時00分 · 池袋大型複合商場", photo: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600" },
+            { time: "19:03", badge: "服飾", name: "Peach john", desc: "停留 01時00分 · 人氣日系居家服", photo: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600" },
+            { time: "20:10", badge: "服飾", name: "Amavel 新宿店", desc: "停留 01時00分 · 新宿店巡禮", photo: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600" },
+            { time: "21:16", badge: "美食", name: "節丸", desc: "停留 01時00分 · 美味拉麵消夜", photo: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600" }
           ],
           todos: [{ text: "確認明日前往川越之鐵道班次", done: false }]
         },
@@ -740,11 +739,11 @@
           date: "09/04",
           hotel: { name: "HOTEL emisia TOKYO TACHIKAWA", price: "續住" },
           spots: [
-            { time: "08:00", badge: "老街", name: "小江戶川越一番街商店街 藏造老屋街道", desc: "停留 01時00分 · 大正與江戶浪漫街景散策" },
-            { time: "09:02", badge: "足湯", name: "Tsubakiya Foot Spa Tearoom (足湯喫茶 椿や)", desc: "停留 01時00分 · 邊泡足湯邊享用日式抹茶甜點" },
-            { time: "10:05", badge: "喫茶", name: "Cafe & Bar Kingyotei (金魚亭)", desc: "停留 01時00分 · 川越金魚造型夢幻甜品" },
-            { time: "11:05", badge: "結緣", name: "川越冰川神社", desc: "停留 01時00分 · 釣鯛魚御守 · 祈求夫妻姻緣美滿" },
-            { time: "12:05", badge: "名店", name: "Restaurante Spaintei (すぺいん亭)", desc: "停留 01時00分 · 超人氣西班牙海鮮燉飯" }
+            { time: "08:00", badge: "老街", name: "小江戶川越一番街商店街 藏造老屋街道", desc: "停留 01時00分 · 大正與江戶浪漫街景散策", photo: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=600" },
+            { time: "09:02", badge: "足湯", name: "Tsubakiya Foot Spa Tearoom (足湯喫茶 椿や)", desc: "停留 01時00分 · 邊泡足湯邊享用日式抹茶甜點", photo: "https://images.unsplash.com/photo-1587314168485-3236d6710814?w=600" },
+            { time: "10:05", badge: "喫茶", name: "Cafe & Bar Kingyotei (金魚亭)", desc: "停留 01時00分 · 川越金魚造型夢幻甜品", photo: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600" },
+            { time: "11:05", badge: "結緣", name: "川越冰川神社", desc: "停留 01時00分 · 釣鯛魚御守 · 祈求夫妻姻緣美滿", photo: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600" },
+            { time: "12:05", badge: "名店", name: "Restaurante Spaintei (すぺいん亭)", desc: "停留 01時00分 · 超人氣西班牙海鮮燉飯", photo: "https://images.unsplash.com/photo-1534080564583-6be75777b70a?w=600" }
           ],
           todos: [{ text: "購買三鷹吉卜力門票兌換券", done: false }]
         },
@@ -753,8 +752,8 @@
           date: "09/05",
           hotel: { name: "HOTEL emisia TOKYO TACHIKAWA", price: "續住" },
           spots: [
-            { time: "08:00", badge: "動畫", name: "三鷹之森吉卜力美術館 (Ghibli Museum)", desc: "停留 01時00分 · 宮崎駿動畫世界探索" },
-            { time: "09:00", badge: "休閒", name: "Takatabashi Multipurpose Space", desc: "停留 01時00分 · 漫步拍照" }
+            { time: "08:00", badge: "動畫", name: "三鷹之森吉卜力美術館 (Ghibli Museum)", desc: "停留 01時00分 · 宮崎駿動畫世界探索", photo: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600" },
+            { time: "09:00", badge: "休閒", name: "Takatabashi Multipurpose Space", desc: "停留 01時00分 · 漫步拍照", photo: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600" }
           ],
           todos: [{ text: "準備明日退房移動至葛西 Minn 飯店", done: false }]
         },
@@ -763,12 +762,12 @@
           date: "09/06",
           hotel: { name: "Minn Kasai (葛西)", price: "15:00 Check-in 入住" },
           spots: [
-            { time: "00:00", badge: "退房", name: "HOTEL emisia TOKYO TACHIKAWA", desc: "停留 11時00分 · 辦理退房出發" },
-            { time: "11:00", badge: "神社", name: "杉並區 阿佐谷神明宮 (Asagaya Shinmeigu)", desc: "停留 01時00分 · 購買全日本唯一絕美蕾絲手環御守" },
-            { time: "12:00", badge: "名勝", name: "新宿御苑", desc: "停留 01時00分 · 綠意庭園漫步拍照" },
-            { time: "13:00", badge: "神社", name: "明治神宮", desc: "停留 01時00分 · 巨型木造鳥居與森林步道" },
-            { time: "14:00", badge: "散策", name: "明治神宮外苑", desc: "停留 01時00分 · 浪漫大道散策" },
-            { time: "15:00", badge: "飯店", name: "Minn Kasai", desc: "停留 辦理入住 · 葛西公寓式舒適飯店" }
+            { time: "00:00", badge: "退房", name: "HOTEL emisia TOKYO TACHIKAWA", desc: "停留 11時00分 · 辦理退房出發", photo: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600" },
+            { time: "11:00", badge: "神社", name: "杉並區 阿佐谷神明宮 (Asagaya Shinmeigu)", desc: "停留 01時00分 · 購買全日本唯一絕美蕾絲手環御守", photo: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600" },
+            { time: "12:00", badge: "名勝", name: "新宿御苑", desc: "停留 01時00分 · 綠意庭園漫步拍照", photo: "https://images.unsplash.com/photo-1528164344705-475426879c0d?w=600" },
+            { time: "13:00", badge: "神社", name: "明治神宮", desc: "停留 01時00分 · 巨型木造鳥居與森林步道", photo: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=600" },
+            { time: "14:00", badge: "散策", name: "明治神宮外苑", desc: "停留 01時00分 · 浪漫大道散策", photo: "https://images.unsplash.com/photo-1470240731273-7821a6eeb6bd?w=600" },
+            { time: "15:00", badge: "飯店", name: "Minn Kasai", desc: "停留 辦理入住 · 葛西公寓式舒適飯店", photo: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600" }
           ],
           todos: [{ text: "確認明日迪士尼海洋開園時間與 DPA 策略", done: false }]
         },
@@ -777,7 +776,7 @@
           date: "09/07",
           hotel: { name: "Minn Kasai", price: "續住" },
           spots: [
-            { time: "08:45", badge: "夢幻", name: "東京迪士尼海洋 (Tokyo DisneySea)", desc: "停留 全日遊玩 · 新園區 Fantasy Springs 夢幻泉鄉" }
+            { time: "08:45", badge: "夢幻", name: "東京迪士尼海洋 (Tokyo DisneySea)", desc: "停留 全日遊玩 · 新園區 Fantasy Springs 夢幻泉鄉", photo: "https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?w=600" }
           ],
           todos: [{ text: "提早入園搶冰雪奇緣與小飛俠 DPA 預約券", done: true }]
         },
@@ -786,10 +785,10 @@
           date: "09/08",
           hotel: { name: "Minn Kasai", price: "續住 (最後一晚)" },
           spots: [
-            { time: "00:00", badge: "休息", name: "Minn Kasai", desc: "停留 10時00分 · 悠閒早晨" },
-            { time: "10:06", badge: "烘焙", name: "cinq（gonno bakery market）", desc: "停留 01時00分 · 人氣排隊精緻烘焙早午餐" },
-            { time: "11:06", badge: "海濱", name: "葛西臨海公園", desc: "停留 01時00分 · 眺望東京灣海景與水族館" },
-            { time: "12:12", badge: "摩天輪", name: "鑽石與花大摩天輪 (Dia to Hana)", desc: "停留 01時00分 · 搭乘全日本最大摩天輪俯瞰美景" }
+            { time: "00:00", badge: "休息", name: "Minn Kasai", desc: "停留 10時00分 · 悠閒早晨", photo: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600" },
+            { time: "10:06", badge: "烘焙", name: "cinq（gonno bakery market）", desc: "停留 01時00分 · 人氣排隊精緻烘焙早午餐", photo: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600" },
+            { time: "11:06", badge: "海濱", name: "葛西臨海公園", desc: "停留 01時00分 · 眺望東京灣海景與水族館", photo: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600" },
+            { time: "12:12", badge: "摩天輪", name: "鑽石與花大摩天輪 (Dia to Hana)", desc: "停留 01時00分 · 搭乘全日本最大摩天輪俯瞰美景", photo: "https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?w=600" }
           ],
           todos: [{ text: "整理全部行李戰利品，準備明日凌晨搭機", done: false }]
         },
@@ -798,8 +797,8 @@
           date: "09/09",
           hotel: { name: "甜蜜返家 🏠", price: "旅程圓滿結束" },
           spots: [
-            { time: "02:25", badge: "航班", name: "HND·東京國際機場(羽田機場)", desc: "停留 03時00分 · 搭乘紅眼航班返台 ✈️" },
-            { time: "08:00", badge: "抵達", name: "TPE·臺灣桃園國際機場", desc: "停留 01時00分 · 順利返台，蜜月旅行圓滿完成 💕" }
+            { time: "02:25", badge: "航班", name: "HND·東京國際機場(羽田機場)", desc: "停留 03時00分 · 搭乘紅眼航班返台 ✈️", photo: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600" },
+            { time: "08:00", badge: "抵達", name: "TPE·臺灣桃園國際機場", desc: "停留 01時00分 · 順利返台，蜜月旅行圓滿完成 💕", photo: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600" }
           ],
           todos: [{ text: "出關領取行李，返回甜蜜的家", done: true }]
         }
@@ -830,13 +829,13 @@
     };
 
     function loadApp() {
-      const saved = localStorage.getItem("travel_honeymoon_exact_chictrip_v1");
+      const saved = localStorage.getItem("travel_honeymoon_final_chictrip_exact_photo");
       if (saved) appData = JSON.parse(saved);
       render();
     }
 
     function saveApp() {
-      localStorage.setItem("travel_honeymoon_exact_chictrip_v1", JSON.stringify(appData));
+      localStorage.setItem("travel_honeymoon_final_chictrip_exact_photo", JSON.stringify(appData));
       render();
     }
 
@@ -884,7 +883,7 @@
         </div>
       `).join('');
 
-      // 渲染時間軸與「Japan Transit + Google 雙轉乘按鈕」
+      // 渲染時間軸與「Japan Transit (自動喚起App/網頁) + Google 雙轉乘按鈕」
       const cur = appData.days[appData.activeDayIndex] || appData.days[0];
       const spotList = document.getElementById("spotTimelineList");
       
@@ -896,6 +895,7 @@
           const fromName = s.name.split(' ')[0].replace(/·/g, '');
           const toName = nextSpot ? nextSpot.name.split(' ')[0].replace(/·/g, '') : '';
           
+          // Japan Transit (Jorudan) Universal Link (可直接喚起 App / 官方網頁)
           const jorudanUrl = `https://world.jorudan.co.jp/mln/zh-tw/?f_lang=zh-tw&from=${encodeURIComponent(fromName)}&to=${encodeURIComponent(toName)}`;
           const googleUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(s.name)}&destination=${encodeURIComponent(nextSpot ? nextSpot.name : '')}&travelmode=transit`;
 
@@ -1158,7 +1158,7 @@
       closeModal('flightModal'); saveApp();
     }
 
-    function saveTripNotes(val) { appData.notes = val; localStorage.setItem("travel_honeymoon_exact_chictrip_v1", JSON.stringify(appData)); }
+    function saveTripNotes(val) { appData.notes = val; localStorage.setItem("travel_honeymoon_final_chictrip_exact_photo", JSON.stringify(appData)); }
 
     // 當日待辦
     function addTodoPrompt() {
