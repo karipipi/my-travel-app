@@ -13,6 +13,8 @@
       --primary: #0284C7;
       --primary-dark: #0369A1;
       --primary-soft: #E0F2FE;
+      --transit-orange: #EA580C;
+      --transit-soft: #FFEDD5;
       --accent: #F59E0B;
       --gold: #D97706;
       --gold-bg: #FEF3C7;
@@ -75,7 +77,7 @@
     .section-title { font-size: 16px; font-weight: 900; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
     .btn-add { background: var(--primary-soft); color: var(--primary); border: 1px solid #BAE6FD; padding: 5px 12px; border-radius: 10px; font-size: 11.5px; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
 
-    /* ==================== 📍 旗艦級時間軸與景點卡片 ==================== */
+    /* ==================== 📍 時間軸與景點卡片 ==================== */
     .timeline-container { position: relative; padding-left: 20px; }
     .timeline-container::before {
       content: '';
@@ -102,14 +104,12 @@
       z-index: 2;
     }
 
-    /* 景點主卡片 */
     .spot-card-pro {
       background: #FFFFFF;
       border-radius: 18px;
       overflow: hidden;
       box-shadow: var(--shadow-card);
       border: 1px solid #E2E8F0;
-      transition: transform 0.2s;
     }
     .spot-cover-wrap { position: relative; height: 120px; background: #E2E8F0; cursor: pointer; overflow: hidden; }
     .spot-cover-img { width: 100%; height: 100%; object-fit: cover; }
@@ -127,59 +127,61 @@
     .action-pill-group { display: flex; gap: 4px; }
     .pill-btn { background: #F1F5F9; border: 1px solid #E2E8F0; width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 11px; color: var(--text-sub); }
 
-    /* ==================== 🚇 升級版 A➔B Google 路線導航按鈕 ==================== */
-    .transit-connector-pro {
+    /* ==================== 🚇 雙核心交通轉乘卡 (Japan Transit + Google) ==================== */
+    .transit-box-dual {
       margin: 12px 0 12px 4px;
-      padding: 8px 12px;
+      padding: 10px 12px;
       background: #FFFFFF;
-      border: 1.5px dashed #BAE6FD;
-      border-radius: 12px;
+      border: 1px solid #E2E8F0;
+      border-radius: 14px;
+      box-shadow: 0 2px 8px rgba(15,23,42,0.04);
+    }
+    .transit-header-row {
       display: flex;
+      justify-content: space-between;
       align-items: center;
+      font-size: 11.5px;
+      color: var(--text-sub);
+      margin-bottom: 8px;
+    }
+    .transit-header-row b { color: #0369A1; font-weight: 800; }
+    .transit-buttons-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 8px;
+    }
+    .btn-transit-jorudan {
+      background: linear-gradient(135deg, #EA580C, #C2410C);
+      color: #FFFFFF;
       text-decoration: none;
-      color: var(--text-main);
-      box-shadow: 0 2px 8px rgba(2,132,199,0.06);
-      transition: all 0.2s ease;
-    }
-    .transit-connector-pro:active {
-      background: #F0F9FF;
-      border-color: var(--primary);
-      transform: scale(0.98);
-    }
-    .transit-icon-circle {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background: #E0F2FE;
-      color: var(--primary);
+      padding: 7px 8px;
+      border-radius: 9px;
+      font-size: 11px;
+      font-weight: 800;
+      text-align: center;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
-      flex-shrink: 0;
+      gap: 4px;
+      box-shadow: 0 2px 6px rgba(234,88,12,0.25);
     }
-    .transit-text-box {
-      flex: 1;
-      font-size: 11.5px;
-      color: var(--text-sub);
-      line-height: 1.3;
-    }
-    .transit-text-box b {
-      color: #0369A1;
-      font-weight: 800;
-    }
-    .transit-arrow-btn {
-      font-size: 12px;
-      font-weight: 900;
+    .btn-transit-google {
+      background: #F0F9FF;
       color: var(--primary);
-      background: #E0F2FE;
-      padding: 3px 8px;
-      border-radius: 6px;
-      flex-shrink: 0;
+      border: 1px solid #BAE6FD;
+      text-decoration: none;
+      padding: 7px 8px;
+      border-radius: 9px;
+      font-size: 11px;
+      font-weight: 800;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
     }
 
-    /* ==================== 🏨 頂級飯店卡 ==================== */
+    /* ==================== 🏨 住宿卡片 ==================== */
     .hotel-card-pro {
       background: #FFFFFF;
       border-radius: 18px;
@@ -187,14 +189,12 @@
       margin-bottom: 16px;
       border: 1px solid #E2E8F0;
       box-shadow: var(--shadow-card);
-      position: relative;
     }
     .hotel-header-pro { display: flex; justify-content: space-between; align-items: center; }
     .hotel-title-pro { font-size: 16px; font-weight: 900; color: #0F172A; }
     .hotel-price-badge { font-size: 14px; font-weight: 900; color: var(--gold); background: var(--gold-bg); padding: 3px 8px; border-radius: 8px; }
     .hotel-meta-row { font-size: 12px; color: var(--text-sub); margin: 8px 0 12px; display: flex; gap: 10px; }
-    .hotel-btns-row { display: flex; gap: 8px; }
-    .hotel-nav-main { flex: 1; background: linear-gradient(135deg, #0284C7, #0369A1); color: #fff; text-decoration: none; padding: 8px; border-radius: 10px; font-size: 12px; font-weight: 800; text-align: center; display: flex; align-items: center; justify-content: center; gap: 4px; }
+    .hotel-nav-main { display: block; background: linear-gradient(135deg, #0284C7, #0369A1); color: #fff; text-decoration: none; padding: 8px; border-radius: 10px; font-size: 12px; font-weight: 800; text-align: center; }
 
     /* ==================== 📋 當日待辦清單 ==================== */
     .todo-box-pro { background: #FFFFFF; border-radius: 18px; padding: 16px; margin-bottom: 16px; border: 1px solid #E2E8F0; box-shadow: var(--shadow-card); }
@@ -299,7 +299,7 @@
 
     <div class="content">
 
-      <!-- ==================== 分頁 1: 旗艦時間軸行程 (Itinerary) ==================== -->
+      <!-- ==================== 分頁 1: 行程與雙鐵轉乘 (Itinerary) ==================== -->
       <div id="tab-itinerary" class="tab-pane active">
         
         <div class="section-head">
@@ -307,7 +307,7 @@
           <button class="btn-add" onclick="openModal('spotModal')">➕ 新增行程點</button>
         </div>
 
-        <!-- 景點時間軸容器 (含 A➔B 導航按鈕) -->
+        <!-- 景點時間軸容器 (含 Japan Transit + Google 雙導航按鈕) -->
         <div class="timeline-container" id="spotTimelineList"></div>
 
         <!-- 🏨 住宿安排 -->
@@ -324,9 +324,7 @@
             <span>🕒 Check-in 15:00</span>
             <span>🔑 預約確認完畢</span>
           </div>
-          <div class="hotel-btns-row">
-            <a href="#" id="dispHotelLink" target="_blank" class="hotel-nav-main">🧭 Google Maps 導航前往</a>
-          </div>
+          <a href="#" id="dispHotelLink" target="_blank" class="hotel-nav-main">🧭 Google Maps 導航前往</a>
         </div>
 
         <!-- 📋 當日待辦事項 -->
@@ -437,9 +435,10 @@
         </div>
       </div>
 
-      <!-- ==================== 分頁 5: 連結 & 日文 (Links & Translate) ==================== -->
+      <!-- ==================== 分頁 5: 連結 & 日本交通助手 (Links & Translate) ==================== -->
       <div id="tab-links" class="tab-pane">
         
+        <!-- 買票日文對照卡 -->
         <div class="bento-card">
           <div class="section-title" style="margin-bottom:12px;">🗣️ 買票 · 點餐實用日文卡片</div>
           <div class="trans-card">
@@ -464,9 +463,10 @@
           </div>
         </div>
 
+        <!-- 日本鐵道與交通官方查詢 -->
         <div class="bento-card">
           <div class="section-head">
-            <div class="section-title">🔗 官方票券與實用連結</div>
+            <div class="section-title">🚇 日本交通 & 鐵道神器</div>
             <button class="btn-add" onclick="addLinkPrompt()">➕ 新增連結</button>
           </div>
           <div id="linksList"></div>
@@ -621,7 +621,7 @@
   </div>
 
   <script>
-    // --- 核心資料庫 (旗艦版) ---
+    // --- 核心資料庫 (支援 Japan Transit + Google 雙導航) ---
     let appData = {
       title: "2026 日本藏王滑雪 + 東京自由行 ❄️",
       startDate: "2026-10-28",
@@ -709,21 +709,22 @@
         { name: "Suica 西瓜卡加值", amount: 6000 }
       ],
       links: [
+        { name: "🚇 Japan Transit (乘換案內·Jorudan官網)", url: "https://world.jorudan.co.jp/mln/zh-tw/" },
+        { name: "🚅 JR 新幹線與特急預約官網 (Eki-net)", url: "https://www.eki-net.com/" },
         { name: "🇯🇵 Visit Japan Web 入境審查申報", url: "https://vjt.digital.go.jp/" },
         { name: "🧭 Google Maps 官方網站", url: "https://www.google.com/maps" },
-        { name: "🚅 JR 新幹線與特急預約官網", url: "https://www.eki-net.com/" },
         { name: "💴 即時日幣匯率換算 (台灣銀行)", url: "https://rate.bot.com.tw/xrt?Lang=zh-TW" }
       ]
     };
 
     function loadApp() {
-      const saved = localStorage.getItem("travel_pro_transit_app");
+      const saved = localStorage.getItem("travel_dual_transit_app");
       if (saved) appData = JSON.parse(saved);
       render();
     }
 
     function saveApp() {
-      localStorage.setItem("travel_pro_transit_app", JSON.stringify(appData));
+      localStorage.setItem("travel_dual_transit_app", JSON.stringify(appData));
       render();
     }
 
@@ -771,7 +772,7 @@
         </div>
       `).join('');
 
-      // ==================== 渲染時間軸與 A➔B 交通導航 ====================
+      // ==================== 渲染時間軸與「Japan Transit + Google 雙轉乘按鈕」 ====================
       const cur = appData.days[appData.activeDayIndex] || appData.days[0];
       const spotList = document.getElementById("spotTimelineList");
       
@@ -780,6 +781,14 @@
       } else {
         spotList.innerHTML = cur.spots.map((s, idx) => {
           const nextSpot = cur.spots[idx + 1];
+          const fromName = s.name.split(' ')[0];
+          const toName = nextSpot ? nextSpot.name.split(' ')[0] : '';
+          
+          // Japan Transit (Jorudan) 智慧連結
+          const jorudanUrl = `https://world.jorudan.co.jp/mln/zh-tw/?f_lang=zh-tw&from=${encodeURIComponent(fromName)}&to=${encodeURIComponent(toName)}`;
+          // Google Maps 轉乘導航連結
+          const googleUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(s.name)}&destination=${encodeURIComponent(nextSpot ? nextSpot.name : '')}&travelmode=transit`;
+
           return `
             <div class="timeline-node">
               <div class="timeline-dot"></div>
@@ -811,16 +820,22 @@
                 </div>
               </div>
 
-              <!-- A➔B Google Maps 智慧轉乘路線按鈕 -->
+              <!-- 雙核心交通轉乘按鈕 (Japan Transit + Google Maps) -->
               ${nextSpot ? `
-                <a href="https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(s.name)}&destination=${encodeURIComponent(nextSpot.name)}&travelmode=transit" target="_blank" class="transit-connector-pro">
-                  <div class="transit-icon-circle">🚇</div>
-                  <div class="transit-text-box">
-                    <b>${s.name.split(' ')[0]}</b> ➔ <b>${nextSpot.name.split(' ')[0]}</b>
-                    <div>點擊開啟 Google 大眾運輸轉乘路線</div>
+                <div class="transit-box-dual">
+                  <div class="transit-header-row">
+                    <span>移動路線：<b>${fromName}</b> ➔ <b>${toName}</b></span>
+                    <span style="font-size:10px; color:#94A3B8;">轉乘查詢</span>
                   </div>
-                  <div class="transit-arrow-btn">導航 ↗</div>
-                </a>
+                  <div class="transit-buttons-grid">
+                    <a href="${jorudanUrl}" target="_blank" class="btn-transit-jorudan">
+                      🚇 Japan Transit (月台/車廂) ↗
+                    </a>
+                    <a href="${googleUrl}" target="_blank" class="btn-transit-google">
+                      🗺️ Google 路線導航 ↗
+                    </a>
+                  </div>
+                </div>
               ` : ''}
             </div>
           `;
@@ -1055,7 +1070,7 @@
       closeModal('flightModal'); saveApp();
     }
 
-    function saveTripNotes(val) { appData.notes = val; localStorage.setItem("travel_pro_transit_app", JSON.stringify(appData)); }
+    function saveTripNotes(val) { appData.notes = val; localStorage.setItem("travel_dual_transit_app", JSON.stringify(appData)); }
 
     // 當日待辦
     function addTodoPrompt() {
@@ -1076,10 +1091,7 @@
     }
 
     // 行李清單
-    function togglePrep(idx) {
-      appData.preps[idx].done = !appData.preps[idx].done;
-      saveApp();
-    }
+    function togglePrep(idx) { appData.preps[idx].done = !appData.preps[idx].done; saveApp(); }
     function addPrepPrompt() {
       const cat = prompt("請輸入分類（例如：重要證件、衣物、電子）：", "行李");
       if (!cat) return;
