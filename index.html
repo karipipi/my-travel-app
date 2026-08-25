@@ -22,20 +22,20 @@
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif; }
     body { background-color: var(--bg); color: var(--text-main); display: flex; justify-content: center; }
     
-    /* 手機容器 (電腦看也是精美手機尺寸) */
     .app-container { width: 100%; max-width: 440px; min-height: 100vh; background: #F3F7FA; position: relative; padding-bottom: 85px; box-shadow: 0 0 25px rgba(0,0,0,0.06); }
 
     /* 頂部 Hero 封面區 */
     .hero-banner {
       position: relative;
-      padding: env(safe-area-inset-top, 36px) 20px 24px;
-      background: linear-gradient(180deg, rgba(20, 42, 66, 0.6) 0%, rgba(20, 42, 66, 0.85) 100%), url('https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=800&auto=format&fit=crop&q=80') center/cover no-repeat;
+      padding: env(safe-area-inset-top, 38px) 20px 24px;
+      background: linear-gradient(180deg, rgba(20, 42, 66, 0.55) 0%, rgba(20, 42, 66, 0.85) 100%), url('https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=800') center/cover no-repeat;
       color: #FFFFFF;
       text-align: center;
+      transition: background 0.3s;
     }
     .hero-edit-btn { position: absolute; top: env(safe-area-inset-top, 16px); right: 16px; background: rgba(255,255,255,0.25); border: none; color: #fff; padding: 4px 10px; border-radius: 14px; font-size: 11px; font-weight: bold; cursor: pointer; backdrop-filter: blur(4px); }
     .hero-title { font-size: 19px; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 6px; text-shadow: 0 2px 4px rgba(0,0,0,0.4); }
-    .hero-meta { font-size: 12px; opacity: 0.9; font-weight: 500; letter-spacing: 0.3px; }
+    .hero-meta { font-size: 12px; opacity: 0.92; font-weight: 500; letter-spacing: 0.3px; }
 
     /* 天數選擇列 (Day Pills) */
     .day-bar { display: flex; gap: 6px; padding: 12px 14px; background: #FFFFFF; overflow-x: auto; border-bottom: 1px solid var(--border); }
@@ -53,14 +53,13 @@
     .day-card.active { background: var(--active-pill); border-color: #B5D2E2; }
     .day-num { font-size: 15px; font-weight: 800; color: #1E6B9B; line-height: 1; }
     .day-date { font-size: 10px; color: var(--text-sub); margin-top: 3px; font-weight: 600; }
-    .add-day-pill { border: 1px dashed var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--primary); font-weight: bold; }
 
     /* 主頁面內容區 */
     .content { padding: 14px 14px; }
     .tab-pane { display: none; }
     .tab-pane.active { display: block; }
 
-    /* 區塊卡片共通樣式 */
+    /* 區塊卡片 */
     .section-card { background: var(--card-bg); border-radius: 14px; padding: 16px; margin-bottom: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); border: 1px solid var(--border); }
     .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
     .section-title { font-size: 15px; font-weight: 800; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
@@ -74,8 +73,6 @@
     .spot-title-row { display: flex; justify-content: space-between; align-items: flex-start; }
     .spot-name { font-size: 14px; font-weight: 800; color: #1E6B9B; text-decoration: none; }
     .spot-desc { font-size: 12px; color: var(--text-sub); margin-top: 4px; line-height: 1.4; }
-    .spot-actions { display: flex; gap: 4px; margin-top: 6px; }
-    .mini-btn { background: #F1F5F9; border: none; font-size: 11px; padding: 2px 8px; border-radius: 6px; color: var(--text-sub); cursor: pointer; text-decoration: none; }
 
     /* 🏨 住宿卡片 */
     .hotel-card { background: var(--card-bg); border-radius: 14px; padding: 16px; margin-bottom: 14px; border: 1px solid var(--border); }
@@ -91,7 +88,11 @@
     .todo-text { font-size: 13px; color: var(--text-main); flex: 1; }
     .todo-text.done { text-decoration: line-through; color: #A0AEC0; }
 
-    /* 底部導航列 (1:1 復刻 5 大功能) */
+    /* 行李進度條 */
+    .progress-bar-bg { background: #E2E8F0; border-radius: 10px; height: 8px; width: 100%; overflow: hidden; margin-bottom: 12px; }
+    .progress-bar-fill { background: var(--green); height: 100%; width: 0%; transition: width 0.3s; }
+
+    /* 底部導航列 (1:1 復刻 5 大功能圖示) */
     nav.bottom-nav {
       position: fixed;
       bottom: 0;
@@ -128,6 +129,7 @@
     .form-group { margin-bottom: 12px; }
     .form-label { display: block; font-size: 11px; font-weight: 800; color: var(--text-sub); margin-bottom: 4px; }
     .form-input { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; outline: none; }
+    .form-row { display: flex; gap: 8px; }
     .submit-btn { width: 100%; background: #1E6B9B; color: #fff; padding: 12px; border: none; border-radius: 10px; font-size: 14px; font-weight: 800; cursor: pointer; margin-top: 8px; }
   </style>
 </head>
@@ -137,7 +139,7 @@
     
     <!-- 頂部 Hero 封面 -->
     <div class="hero-banner" id="heroBanner">
-      <button class="hero-edit-btn" onclick="openModal('metaModal')">✏️ 編輯行程資訊</button>
+      <button class="hero-edit-btn" onclick="openModal('metaModal')">✏️ 編輯旅程</button>
       <div class="hero-title" id="dispTitle">2026 日本藏王滑雪 + 日光 + 東京</div>
       <div class="hero-meta" id="dispMeta">02/24 - 03/05 ｜ 10天9夜 ｜ 2人同行 ❄️</div>
     </div>
@@ -147,7 +149,7 @@
 
     <div class="content">
 
-      <!-- 分頁 1: 行程 (Itinerary) - 預設顯示 -->
+      <!-- 分頁 1: 行程 (Itinerary) -->
       <div id="tab-itinerary" class="tab-pane active">
         
         <!-- 景點與美食區塊 -->
@@ -174,10 +176,10 @@
           </a>
         </div>
 
-        <!-- 📋 待辦事項區塊 -->
+        <!-- 📋 當日待辦事項區塊 -->
         <div class="section-card">
           <div class="section-header">
-            <div class="section-title">📋 待辦事項</div>
+            <div class="section-title">📋 當日待辦備忘</div>
             <button class="add-item-btn" onclick="addTodoPrompt()">➕ 新增</button>
           </div>
           <div id="todoList"></div>
@@ -188,17 +190,43 @@
       <!-- 分頁 2: 總覽 (Overview) -->
       <div id="tab-overview" class="tab-pane">
         <div class="section-card">
-          <div class="section-title" style="margin-bottom:12px;">🗺️ 旅行總覽簡介</div>
-          <p style="font-size:13px; color:var(--text-sub); line-height:1.6;" id="overviewText">
-            包含藏王樹冰纜車、滑雪溫泉度假、日光東照宮與東京市區逛街採購行程。所有每日行程均可於「行程」分頁中自由設定與導航！
+          <div class="section-title" style="margin-bottom:8px;">✈️ 航班資訊</div>
+          <div style="background:#F8FAFC; padding:12px; border-radius:10px; border:1px solid #E2E8F0; font-size:13px; line-height:1.6;">
+            <div><b>去程</b>：長榮航空 BR198 ｜ 08:50 TPE ➔ 13:15 NRT (T2)</div>
+            <div style="margin-top:4px;"><b>回程</b>：長榮航空 BR197 ｜ 14:15 NRT ➔ 17:05 TPE (T2)</div>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <div class="section-title" style="margin-bottom:8px;">🗺️ 行程總覽亮點</div>
+          <p style="font-size:13px; color:var(--text-sub); line-height:1.6;">
+            ❄️ 藏王樹冰纜車夜間點燈 & 溫泉度假<br>
+            ⛩️ 日光東照宮世界遺產巡禮<br>
+            🗼 東京 SHIBUYA SKY 展望台 & 市區逛街採購
           </p>
+        </div>
+
+        <div class="section-card">
+          <div class="section-title" style="margin-bottom:8px;">🚨 緊急聯絡與實用資訊</div>
+          <div style="font-size:12px; color:var(--text-sub); line-height:1.6;">
+            • 日本報警電話：110 ｜ 救護車/火警：119<br>
+            • 台北駐日經濟文化代表處：+81-3-3280-7811<br>
+            • 海外緊急求助專線：+886-800-0885-0885
+          </div>
         </div>
       </div>
 
-      <!-- 分頁 3: 準備 (Prep) -->
+      <!-- 分頁 3: 準備 (Prep / 行前裝備與行李) -->
       <div id="tab-prep" class="tab-pane">
         <div class="section-card">
-          <div class="section-title" style="margin-bottom:12px;">🧳 行前裝備與行李</div>
+          <div class="section-header">
+            <div class="section-title">🧳 行前行李打包清單</div>
+            <span style="font-size:12px; font-weight:bold; color:var(--green);" id="packPercent">0%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="packBarFill"></div>
+          </div>
+          <button class="add-item-btn" style="width:100%; padding:8px; margin-bottom:12px;" onclick="addPrepPrompt()">➕ 新增行李項目</button>
           <div id="prepList"></div>
         </div>
       </div>
@@ -208,9 +236,10 @@
         <div class="section-card">
           <div class="section-header">
             <div class="section-title">👛 旅行預算花費</div>
-            <button class="add-item-btn" onclick="openModal('budgetModal')">➕ 記帳</button>
+            <button class="add-item-btn" onclick="openModal('budgetModal')">➕ 記一筆</button>
           </div>
-          <div style="font-size:24px; font-weight:900; color:#1E6B9B; margin:8px 0;" id="totalBudget">¥ 0</div>
+          <div style="font-size:26px; font-weight:900; color:#1E6B9B; margin:6px 0;" id="totalBudget">¥ 0</div>
+          <div style="font-size:12px; color:var(--text-sub); margin-bottom:12px;" id="totalBudgetTWD">約合 NT$ 0 元</div>
           <div id="expenseList"></div>
         </div>
       </div>
@@ -218,15 +247,11 @@
       <!-- 分頁 5: 連結 (Links) -->
       <div id="tab-links" class="tab-pane">
         <div class="section-card">
-          <div class="section-title" style="margin-bottom:12px;">🔗 實用票券與預約連結</div>
-          <div id="linksList">
-            <div style="padding:8px 0; border-bottom:1px solid #F1F5F9;">
-              <a href="https://www.google.com/maps" target="_blank" style="color:#1E6B9B; font-size:13px; font-weight:bold; text-decoration:none;">🧭 Google Maps 官方網站 ↗</a>
-            </div>
-            <div style="padding:8px 0;">
-              <a href="https://vjt.digital.go.jp/" target="_blank" style="color:#1E6B9B; font-size:13px; font-weight:bold; text-decoration:none;">🇯🇵 Visit Japan Web 入境審查 ↗</a>
-            </div>
+          <div class="section-header">
+            <div class="section-title">🔗 實用票券與預約連結</div>
+            <button class="add-item-btn" onclick="addLinkPrompt()">➕ 新增連結</button>
           </div>
+          <div id="linksList"></div>
         </div>
       </div>
 
@@ -243,19 +268,31 @@
 
   </div>
 
-  <!-- 彈窗 1：編輯頂部資訊 -->
+  <!-- 彈窗 1：編輯旅程資訊 (日期選擇與封面更換) -->
   <div class="modal" id="metaModal">
     <div class="modal-box">
-      <div class="modal-title">✏️ 編輯行程基本資訊</div>
+      <div class="modal-title">✏️ 編輯旅程資訊</div>
       <div class="form-group">
         <label class="form-label">行程標題</label>
-        <input class="form-input" id="inpTitle" value="2026 日本藏王滑雪 + 日光 + 東京">
+        <input class="form-input" id="inpTitle">
       </div>
       <div class="form-group">
-        <label class="form-label">副標題 (日期 / 天數 / 人數)</label>
-        <input class="form-input" id="inpMeta" value="02/24 - 03/05 ｜ 10天9夜 ｜ 2人同行 ❄️">
+        <label class="form-label">旅行起訖日期 (自動計算天數)</label>
+        <div class="form-row">
+          <input type="date" class="form-input" id="inpStartDate" onchange="autoCalcDates()">
+          <input type="date" class="form-input" id="inpEndDate" onchange="autoCalcDates()">
+        </div>
       </div>
-      <button class="submit-btn" onclick="saveMeta()">儲存資訊</button>
+      <div class="form-group">
+        <label class="form-label">同行人數 / 備註</label>
+        <input class="form-input" id="inpPeople" placeholder="例如：2人同行 ❄️">
+      </div>
+      <div class="form-group">
+        <label class="form-label">更換封面圖片網址 (或上傳檔案)</label>
+        <input class="form-input" id="inpCoverUrl" placeholder="請輸入圖片網址 (https://...)">
+        <input type="file" id="coverFileInput" accept="image/*" style="margin-top:6px; font-size:11px;" onchange="handleCoverUpload(event)">
+      </div>
+      <button class="submit-btn" onclick="saveMeta()">儲存變更</button>
     </div>
   </div>
 
@@ -285,25 +322,44 @@
       <div class="modal-title">🏨 編輯當日住宿</div>
       <div class="form-group">
         <label class="form-label">飯店名稱</label>
-        <input class="form-input" id="inpHotelName" value="五感の湯つるや">
+        <input class="form-input" id="inpHotelName">
       </div>
       <div class="form-group">
         <label class="form-label">價格 / 晚數</label>
-        <input class="form-input" id="inpHotelPrice" value="$28,442 / 3晚">
+        <input class="form-input" id="inpHotelPrice">
       </div>
       <div class="form-group">
         <label class="form-label">導航按鈕文字</label>
-        <input class="form-input" id="inpHotelBtnText" value="📍 巴士站➔飯店">
+        <input class="form-input" id="inpHotelBtnText">
       </div>
       <button class="submit-btn" onclick="saveHotel()">儲存住宿</button>
     </div>
   </div>
 
+  <!-- 彈窗 4：記帳 -->
+  <div class="modal" id="budgetModal">
+    <div class="modal-box">
+      <div class="modal-title">👛 新增消費記帳</div>
+      <div class="form-group">
+        <label class="form-label">消費項目</label>
+        <input class="form-input" id="inpExpName" placeholder="例如：藏王樹冰纜車票">
+      </div>
+      <div class="form-group">
+        <label class="form-label">金額 (日圓 JPY)</label>
+        <input class="form-input" type="number" id="inpExpAmount" placeholder="例如：3800">
+      </div>
+      <button class="submit-btn" onclick="saveExpense()">加入記帳</button>
+    </div>
+  </div>
+
   <script>
-    // --- 預設完整資料 (完全對標截圖) ---
+    // --- 核心資料結構 ---
     let appData = {
       title: "2026 日本藏王滑雪 + 日光 + 東京",
-      meta: "02/24 - 03/05 ｜ 10天9夜 ｜ 2人同行 ❄️",
+      startDate: "2026-02-24",
+      endDate: "2026-03-05",
+      people: "2人同行 ❄️",
+      coverImg: "https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=800",
       activeDayIndex: 1, // 預設停在 Day 2 (02/25)
       days: [
         { num: 1, date: "02/24", spots: [{ badge: "抵達", name: "成田機場 ➔ 東京市區", desc: "搭乘 Skyliner 前往飯店辦理入住" }] },
@@ -326,24 +382,72 @@
         { num: 4, date: "02/27", spots: [{ badge: "觀光", name: "銀山溫泉街", desc: "大正浪漫街景散策 · 溫泉街足湯" }] },
         { num: 5, date: "02/28", spots: [{ badge: "移動", name: "日光東照宮", desc: "參訪世界遺產 · 二荒山神社" }] },
         { num: 6, date: "03/01", spots: [{ badge: "景點", name: "中禪寺湖 & 華嚴瀑布", desc: "搭乘纜車遠眺明智平展望台" }] },
-        { num: 7, date: "03/02", spots: [{ badge: "逛街", name: "東京澀谷 / 新宿採購", desc: "SHIBUYA SKY 展望台夕陽" }] }
+        { num: 7, date: "03/02", spots: [{ badge: "逛街", name: "東京澀谷 / 新宿採購", desc: "SHIBUYA SKY 展望台夕陽" }] },
+        { num: 8, date: "03/03", spots: [{ badge: "美食", name: "築地場外市場 & 銀座", desc: "品嚐海鮮丼、壽司與採購伴手禮" }] },
+        { num: 9, date: "03/04", spots: [{ badge: "購物", name: "秋葉原 & 上野阿美橫町", desc: "電器動漫採買 · 二木の菓子" }] },
+        { num: 10, date: "03/05", spots: [{ badge: "返台", name: "成田機場 ➔ 台灣桃園", desc: "搭乘長榮航空 BR197 返家" }] }
+      ],
+      preps: [
+        { cat: "重要證件", text: "護照正本（效期 6 個月以上）", done: true },
+        { cat: "重要證件", text: "Visit Japan Web 填寫完成 QR 截圖", done: true },
+        { cat: "重要證件", text: "日幣現金 10 萬円 & 雙幣信用卡", done: false },
+        { cat: "衣物裝備", text: "發熱衣 ×3、防風防潑水雪褲", done: true },
+        { cat: "衣物裝備", text: "防水保暖滑雪手套 & 毛帽、面罩", done: false },
+        { cat: "電子用品", text: "日本 eSIM 網卡開通 QR 碼", done: true },
+        { cat: "電子用品", text: "10000mAh 行動電源 & 萬用轉接頭", done: false },
+        { cat: "常用藥品", text: "高山/暈車藥、感冒止痛藥、暖暖包", done: false }
+      ],
+      expenses: [
+        { name: "藏王樹冰纜車乘車券 (2人)", amount: 7600 },
+        { name: "梨庵 手打蕎麥午餐", amount: 2000 },
+        { name: "Suica 西瓜卡加值", amount: 6000 }
+      ],
+      links: [
+        { name: "🇯🇵 Visit Japan Web 入境申報", url: "https://vjt.digital.go.jp/" },
+        { name: "🧭 Google Maps 官方網站", url: "https://www.google.com/maps" },
+        { name: "🚅 JR 東日本新幹線預約訂票", url: "https://www.eki-net.com/" },
+        { name: "❄️ 藏王溫泉滑雪場官方即時天氣", url: "http://www.zao-ski.or.jp/" },
+        { name: "💴 即時日幣匯率換算 (台灣銀行)", url: "https://rate.bot.com.tw/xrt?Lang=zh-TW" }
       ]
     };
 
     function loadApp() {
-      const saved = localStorage.getItem("travel_zao_app");
+      const saved = localStorage.getItem("travel_zao_app_v2");
       if (saved) appData = JSON.parse(saved);
       render();
     }
 
     function saveApp() {
-      localStorage.setItem("travel_zao_app", JSON.stringify(appData));
+      localStorage.setItem("travel_zao_app_v2", JSON.stringify(appData));
       render();
     }
 
+    // --- 計算天數與產生日期 ---
+    function getTripSummary() {
+      if (!appData.startDate || !appData.endDate) return { rangeText: "日期未設定", daysCount: 1, nightsCount: 0 };
+      const s = new Date(appData.startDate);
+      const e = new Date(appData.endDate);
+      const diffTime = e - s;
+      const daysCount = Math.max(1, Math.round(diffTime / (1000 * 60 * 60 * 24)) + 1);
+      const nightsCount = Math.max(0, daysCount - 1);
+      
+      const sStr = `${String(s.getMonth()+1).padStart(2,'0')}/${String(s.getDate()).padStart(2,'0')}`;
+      const eStr = `${String(e.getMonth()+1).padStart(2,'0')}/${String(e.getDate()).padStart(2,'0')}`;
+      return {
+        rangeText: `${sStr} - ${eStr}`,
+        daysCount,
+        nightsCount,
+        summary: `${sStr} - ${eStr} ｜ ${daysCount}天${nightsCount}夜 ｜ ${appData.people || '2人同行'}`
+      };
+    }
+
     function render() {
+      const trip = getTripSummary();
       document.getElementById("dispTitle").innerText = appData.title;
-      document.getElementById("dispMeta").innerText = appData.meta;
+      document.getElementById("dispMeta").innerText = trip.summary;
+      if (appData.coverImg) {
+        document.getElementById("heroBanner").style.backgroundImage = `linear-gradient(180deg, rgba(20, 42, 66, 0.55) 0%, rgba(20, 42, 66, 0.85) 100%), url('${appData.coverImg}')`;
+      }
 
       // 渲染天數列
       const dayBar = document.getElementById("dayBar");
@@ -352,7 +456,7 @@
           <div class="day-num">${d.num}</div>
           <div class="day-date">${d.date}</div>
         </div>
-      `).join('') + `<div class="day-card add-day-pill" onclick="addDay()">➕ 加天數</div>`;
+      `).join('');
 
       // 渲染當日行程
       const cur = appData.days[appData.activeDayIndex] || appData.days[0];
@@ -378,7 +482,7 @@
       hotelLink.innerText = hotel.btnText;
       hotelLink.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(hotel.name)}`;
 
-      // 渲染待辦
+      // 渲染當日待辦
       const todoList = document.getElementById("todoList");
       todoList.innerHTML = (cur.todos || []).map((t, idx) => `
         <div class="todo-item">
@@ -387,6 +491,49 @@
           <span style="color:#CBD5E1; cursor:pointer; font-size:11px;" onclick="delTodo(${idx})">✕</span>
         </div>
       `).join('') || '<div style="font-size:12px; color:#A0AEC0; padding:10px 0;">無待辦項目</div>';
+
+      // 渲染行李準備清單
+      const prepList = document.getElementById("prepList");
+      const doneCount = appData.preps.filter(p => p.done).length;
+      const totalCount = appData.preps.length;
+      const percent = totalCount ? Math.round((doneCount / totalCount) * 100) : 0;
+      document.getElementById("packPercent").innerText = `${percent}% (${doneCount}/${totalCount})`;
+      document.getElementById("packBarFill").style.width = `${percent}%`;
+
+      prepList.innerHTML = appData.preps.map((p, idx) => `
+        <div class="todo-item">
+          <input type="checkbox" class="todo-checkbox" ${p.done ? 'checked' : ''} onchange="togglePrep(${idx})">
+          <div class="todo-text ${p.done ? 'done' : ''}">
+            <span style="font-size:10px; background:#E2E8F0; color:#475569; padding:2px 5px; border-radius:4px; margin-right:4px;">${p.cat || '行李'}</span>
+            ${p.text}
+          </div>
+          <span style="color:#CBD5E1; cursor:pointer; font-size:11px;" onclick="delPrep(${idx})">✕</span>
+        </div>
+      `).join('');
+
+      // 渲染預算花費
+      const totalJPY = appData.expenses.reduce((sum, item) => sum + Number(item.amount), 0);
+      document.getElementById("totalBudget").innerText = `¥ ${totalJPY.toLocaleString()}`;
+      document.getElementById("totalBudgetTWD").innerText = `約合 NT$ ${Math.round(totalJPY * 0.22).toLocaleString()} 元`;
+      const expList = document.getElementById("expenseList");
+      expList.innerHTML = appData.expenses.map((e, idx) => `
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:9px 0; border-bottom:1px solid #F1F5F9; font-size:13px;">
+          <div>${e.name}</div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <b style="color:#1E6B9B;">¥ ${Number(e.amount).toLocaleString()}</b>
+            <span style="color:#CBD5E1; cursor:pointer; font-size:11px;" onclick="delExpense(${idx})">✕</span>
+          </div>
+        </div>
+      `).join('');
+
+      // 渲染實用連結
+      const linksList = document.getElementById("linksList");
+      linksList.innerHTML = appData.links.map((link, idx) => `
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid #F1F5F9;">
+          <a href="${link.url}" target="_blank" style="color:#1E6B9B; font-size:13px; font-weight:800; text-decoration:none;">${link.name} ↗</a>
+          <span style="color:#CBD5E1; cursor:pointer; font-size:11px;" onclick="delLink(${idx})">✕</span>
+        </div>
+      `).join('');
     }
 
     // 互動控制
@@ -399,34 +546,84 @@
       document.getElementById('dayBar').style.display = (tabId === 'itinerary') ? 'flex' : 'none';
     }
 
-    function addDay() {
-      const nextNum = appData.days.length + 1;
-      appData.days.push({ num: nextNum, date: `Day ${nextNum}`, spots: [], todos: [] });
-      appData.activeDayIndex = appData.days.length - 1;
-      saveApp();
+    function openModal(id) {
+      if (id === 'metaModal') {
+        document.getElementById('inpTitle').value = appData.title;
+        document.getElementById('inpStartDate').value = appData.startDate;
+        document.getElementById('inpEndDate').value = appData.endDate;
+        document.getElementById('inpPeople').value = appData.people;
+        document.getElementById('inpCoverUrl').value = appData.coverImg || '';
+      } else if (id === 'hotelModal') {
+        const cur = appData.days[appData.activeDayIndex];
+        const h = cur.hotel || { name: "", price: "", btnText: "" };
+        document.getElementById('inpHotelName').value = h.name;
+        document.getElementById('inpHotelPrice').value = h.price;
+        document.getElementById('inpHotelBtnText').value = h.btnText || "📍 路線導航";
+      }
+      document.getElementById(id).classList.add('active');
     }
-
-    function openModal(id) { document.getElementById(id).classList.add('active'); }
     function closeModal(id) { document.getElementById(id).classList.remove('active'); }
     window.onclick = e => { if (e.target.classList.contains('modal')) e.target.classList.remove('active'); }
 
+    // 儲存基本資訊（連動自動生成天數與日期）
     function saveMeta() {
       appData.title = document.getElementById("inpTitle").value;
-      appData.meta = document.getElementById("inpMeta").value;
-      closeModal('metaModal'); saveApp();
+      appData.startDate = document.getElementById("inpStartDate").value;
+      appData.endDate = document.getElementById("inpEndDate").value;
+      appData.people = document.getElementById("inpPeople").value;
+      const customUrl = document.getElementById("inpCoverUrl").value;
+      if (customUrl) appData.coverImg = customUrl;
+
+      // 自動依據起訖日期重新計算並建立天數陣列
+      if (appData.startDate && appData.endDate) {
+        const s = new Date(appData.startDate);
+        const e = new Date(appData.endDate);
+        const daysCount = Math.max(1, Math.round((e - s) / (1000 * 60 * 60 * 24)) + 1);
+        
+        const newDays = [];
+        for (let i = 0; i < daysCount; i++) {
+          const curDate = new Date(s);
+          curDate.setDate(s.getDate() + i);
+          const dateStr = `${String(curDate.getMonth()+1).padStart(2,'0')}/${String(curDate.getDate()).padStart(2,'0')}`;
+          
+          // 保留舊資料或建立新天數
+          const existing = appData.days[i];
+          newDays.push(existing ? { ...existing, num: i + 1, date: dateStr } : { num: i + 1, date: dateStr, spots: [], todos: [] });
+        }
+        appData.days = newDays;
+        if (appData.activeDayIndex >= daysCount) appData.activeDayIndex = 0;
+      }
+
+      closeModal('metaModal');
+      saveApp();
     }
 
+    // 封面照片上傳
+    function handleCoverUpload(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = ev => {
+          appData.coverImg = ev.target.result;
+          document.getElementById('inpCoverUrl').value = '';
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // 景點操作
     function saveSpot() {
       const badge = document.getElementById("inpSpotBadge").value;
       const name = document.getElementById("inpSpotName").value;
       const desc = document.getElementById("inpSpotDesc").value;
-      if (!name) return alert("請輸入名稱");
+      if (!name) return alert("請輸入景點名稱");
       if (!appData.days[appData.activeDayIndex].spots) appData.days[appData.activeDayIndex].spots = [];
       appData.days[appData.activeDayIndex].spots.push({ badge, name, desc });
       closeModal('spotModal'); saveApp();
     }
     function delSpot(idx) { appData.days[appData.activeDayIndex].spots.splice(idx, 1); saveApp(); }
 
+    // 住宿操作
     function saveHotel() {
       const name = document.getElementById("inpHotelName").value;
       const price = document.getElementById("inpHotelPrice").value;
@@ -435,8 +632,9 @@
       closeModal('hotelModal'); saveApp();
     }
 
+    // 當日待辦
     function addTodoPrompt() {
-      const text = prompt("請輸入待辦項目：");
+      const text = prompt("請輸入當日待辦備忘：");
       if (text) {
         if (!appData.days[appData.activeDayIndex].todos) appData.days[appData.activeDayIndex].todos = [];
         appData.days[appData.activeDayIndex].todos.push({ text, done: false });
@@ -444,12 +642,58 @@
       }
     }
     function toggleTodo(idx) {
-      const t = appData.days[appData.activeDayIndex].todos[idx];
-      t.done = !t.done;
+      appData.days[appData.activeDayIndex].todos[idx].done = !appData.days[appData.activeDayIndex].todos[idx].done;
       saveApp();
     }
     function delTodo(idx) {
       appData.days[appData.activeDayIndex].todos.splice(idx, 1);
+      saveApp();
+    }
+
+    // 行李清單操作
+    function togglePrep(idx) {
+      appData.preps[idx].done = !appData.preps[idx].done;
+      saveApp();
+    }
+    function addPrepPrompt() {
+      const cat = prompt("請輸入分類（例如：重要證件、衣物、電子）：", "行李");
+      if (!cat) return;
+      const text = prompt("請輸入要帶的物品名稱：");
+      if (text) {
+        appData.preps.push({ cat, text, done: false });
+        saveApp();
+      }
+    }
+    function delPrep(idx) {
+      appData.preps.splice(idx, 1);
+      saveApp();
+    }
+
+    // 記帳操作
+    function saveExpense() {
+      const name = document.getElementById("inpExpName").value;
+      const amount = document.getElementById("inpExpAmount").value;
+      if (!name || !amount) return alert("請填寫項目與金額");
+      appData.expenses.push({ name, amount: Number(amount) });
+      closeModal('budgetModal'); saveApp();
+    }
+    function delExpense(idx) {
+      appData.expenses.splice(idx, 1);
+      saveApp();
+    }
+
+    // 實用連結操作
+    function addLinkPrompt() {
+      const name = prompt("請輸入連結名稱（例如：成田機場官網）：");
+      if (!name) return;
+      const url = prompt("請輸入網址（https://...）：");
+      if (url) {
+        appData.links.push({ name, url });
+        saveApp();
+      }
+    }
+    function delLink(idx) {
+      appData.links.splice(idx, 1);
       saveApp();
     }
 
