@@ -121,27 +121,62 @@
     .spot-title-pro { font-size: 16px; font-weight: 900; color: #0F172A; text-decoration: none; line-height: 1.3; }
     .spot-rating-tag { background: #FEF3C7; color: #B45309; font-size: 10px; font-weight: 900; padding: 2px 6px; border-radius: 5px; white-space: nowrap; }
     .spot-sub-desc { font-size: 12px; color: var(--text-sub); margin-top: 5px; line-height: 1.45; }
-    
-    .spot-meta-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; padding-top: 8px; border-top: 1px solid #F1F5F9; font-size: 11px; color: var(--text-sub); }
-    .spot-meta-item { display: inline-flex; align-items: center; gap: 3px; background: #F8FAFC; padding: 3px 7px; border-radius: 6px; border: 1px solid #F1F5F9; }
 
     .spot-actions-pro { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
     .btn-nav-mini { background: linear-gradient(135deg, #0284C7, #0369A1); color: #fff; border: none; padding: 6px 12px; border-radius: 10px; font-size: 11.5px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 2px 6px rgba(2,132,199,0.25); }
     .action-pill-group { display: flex; gap: 4px; }
     .pill-btn { background: #F1F5F9; border: 1px solid #E2E8F0; width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 11px; color: var(--text-sub); }
 
-    /* 交通接駁條 (Transit Connector) */
-    .transit-connector {
-      margin: 12px 0 12px 6px;
-      padding: 6px 10px;
-      background: #F8FAFC;
-      border: 1px dashed #CBD5E1;
-      border-radius: 8px;
-      font-size: 11px;
-      color: var(--text-sub);
-      display: inline-flex;
+    /* ==================== 🚇 升級版 A➔B Google 路線導航按鈕 ==================== */
+    .transit-connector-pro {
+      margin: 12px 0 12px 4px;
+      padding: 8px 12px;
+      background: #FFFFFF;
+      border: 1.5px dashed #BAE6FD;
+      border-radius: 12px;
+      display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--text-main);
+      box-shadow: 0 2px 8px rgba(2,132,199,0.06);
+      transition: all 0.2s ease;
+    }
+    .transit-connector-pro:active {
+      background: #F0F9FF;
+      border-color: var(--primary);
+      transform: scale(0.98);
+    }
+    .transit-icon-circle {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #E0F2FE;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+    .transit-text-box {
+      flex: 1;
+      font-size: 11.5px;
+      color: var(--text-sub);
+      line-height: 1.3;
+    }
+    .transit-text-box b {
+      color: #0369A1;
+      font-weight: 800;
+    }
+    .transit-arrow-btn {
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--primary);
+      background: #E0F2FE;
+      padding: 3px 8px;
+      border-radius: 6px;
+      flex-shrink: 0;
     }
 
     /* ==================== 🏨 頂級飯店卡 ==================== */
@@ -272,7 +307,7 @@
           <button class="btn-add" onclick="openModal('spotModal')">➕ 新增行程點</button>
         </div>
 
-        <!-- 景點時間軸容器 -->
+        <!-- 景點時間軸容器 (含 A➔B 導航按鈕) -->
         <div class="timeline-container" id="spotTimelineList"></div>
 
         <!-- 🏨 住宿安排 -->
@@ -682,13 +717,13 @@
     };
 
     function loadApp() {
-      const saved = localStorage.getItem("travel_pro_timeline_app");
+      const saved = localStorage.getItem("travel_pro_transit_app");
       if (saved) appData = JSON.parse(saved);
       render();
     }
 
     function saveApp() {
-      localStorage.setItem("travel_pro_timeline_app", JSON.stringify(appData));
+      localStorage.setItem("travel_pro_transit_app", JSON.stringify(appData));
       render();
     }
 
@@ -736,46 +771,60 @@
         </div>
       `).join('');
 
-      // ==================== 渲染旗艦時間軸行程 ====================
+      // ==================== 渲染時間軸與 A➔B 交通導航 ====================
       const cur = appData.days[appData.activeDayIndex] || appData.days[0];
       const spotList = document.getElementById("spotTimelineList");
       
       if (!cur.spots || cur.spots.length === 0) {
         spotList.innerHTML = '<div style="font-size:13px; color:#94A3B8; padding:16px 0;">點擊右上角「➕ 新增行程點」開始規劃當天行程！</div>';
       } else {
-        spotList.innerHTML = cur.spots.map((s, idx) => `
-          <div class="timeline-node">
-            <div class="timeline-dot"></div>
-            <div class="spot-card-pro">
-              <!-- 封面美照 -->
-              <div class="spot-cover-wrap" onclick="triggerSpotPhoto(${idx})">
-                <img src="${s.photo || 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600'}" class="spot-cover-img">
-                <div class="spot-tag-floating">${s.badge || '景點'}</div>
-                <div class="spot-photo-badge">📷 點擊換照片</div>
-              </div>
-              
-              <div class="spot-body-pro">
-                <div class="spot-title-row">
-                  <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.name)}" target="_blank" class="spot-title-pro">${s.name} ↗</a>
-                  <span class="spot-rating-tag">${s.rating || '4.8 ★'}</span>
+        spotList.innerHTML = cur.spots.map((s, idx) => {
+          const nextSpot = cur.spots[idx + 1];
+          return `
+            <div class="timeline-node">
+              <div class="timeline-dot"></div>
+              <div class="spot-card-pro">
+                <!-- 封面照片 -->
+                <div class="spot-cover-wrap" onclick="triggerSpotPhoto(${idx})">
+                  <img src="${s.photo || 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600'}" class="spot-cover-img">
+                  <div class="spot-tag-floating">${s.badge || '景點'}</div>
+                  <div class="spot-photo-badge">📷 點擊換照片</div>
                 </div>
-                <div class="spot-sub-desc">${s.desc || ''}</div>
                 
-                <div class="spot-actions-pro">
-                  <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.name)}" target="_blank" class="btn-nav-mini">
-                    🧭 Google 導航
-                  </a>
-                  <div class="action-pill-group">
-                    <button class="pill-btn" onclick="moveSpot(${idx}, -1)" title="上移">⬆️</button>
-                    <button class="pill-btn" onclick="moveSpot(${idx}, 1)" title="下移">⬇️</button>
-                    <button class="pill-btn" style="color:red;" onclick="delSpot(${idx})" title="刪除">🗑️</button>
+                <div class="spot-body-pro">
+                  <div class="spot-title-row">
+                    <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.name)}" target="_blank" class="spot-title-pro">${s.name} ↗</a>
+                    <span class="spot-rating-tag">${s.rating || '4.8 ★'}</span>
+                  </div>
+                  <div class="spot-sub-desc">${s.desc || ''}</div>
+                  
+                  <div class="spot-actions-pro">
+                    <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.name)}" target="_blank" class="btn-nav-mini">
+                      🧭 單點導航
+                    </a>
+                    <div class="action-pill-group">
+                      <button class="pill-btn" onclick="moveSpot(${idx}, -1)" title="上移">⬆️</button>
+                      <button class="pill-btn" onclick="moveSpot(${idx}, 1)" title="下移">⬇️</button>
+                      <button class="pill-btn" style="color:red;" onclick="delSpot(${idx})" title="刪除">🗑️</button>
+                    </div>
                   </div>
                 </div>
               </div>
+
+              <!-- A➔B Google Maps 智慧轉乘路線按鈕 -->
+              ${nextSpot ? `
+                <a href="https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(s.name)}&destination=${encodeURIComponent(nextSpot.name)}&travelmode=transit" target="_blank" class="transit-connector-pro">
+                  <div class="transit-icon-circle">🚇</div>
+                  <div class="transit-text-box">
+                    <b>${s.name.split(' ')[0]}</b> ➔ <b>${nextSpot.name.split(' ')[0]}</b>
+                    <div>點擊開啟 Google 大眾運輸轉乘路線</div>
+                  </div>
+                  <div class="transit-arrow-btn">導航 ↗</div>
+                </a>
+              ` : ''}
             </div>
-            ${idx < cur.spots.length - 1 ? '<div class="transit-connector">🚇 建議搭乘地鐵 / 步行前往下個地點 · 約 15 分鐘</div>' : ''}
-          </div>
-        `).join('');
+          `;
+        }).join('');
       }
 
       // 當日住宿
@@ -1006,7 +1055,7 @@
       closeModal('flightModal'); saveApp();
     }
 
-    function saveTripNotes(val) { appData.notes = val; localStorage.setItem("travel_pro_timeline_app", JSON.stringify(appData)); }
+    function saveTripNotes(val) { appData.notes = val; localStorage.setItem("travel_pro_transit_app", JSON.stringify(appData)); }
 
     // 當日待辦
     function addTodoPrompt() {
@@ -1017,18 +1066,33 @@
         saveApp();
       }
     }
-    function toggleTodo(idx) { appData.days[appData.activeDayIndex].todos[idx].done = !appData.days[appData.activeDayIndex].todos[idx].done; saveApp(); }
-    function delTodo(idx) { appData.days[appData.activeDayIndex].todos.splice(idx, 1); saveApp(); }
+    function toggleTodo(idx) {
+      appData.days[appData.activeDayIndex].todos[idx].done = !appData.days[appData.activeDayIndex].todos[idx].done;
+      saveApp();
+    }
+    function delTodo(idx) {
+      appData.days[appData.activeDayIndex].todos.splice(idx, 1);
+      saveApp();
+    }
 
     // 行李清單
-    function togglePrep(idx) { appData.preps[idx].done = !appData.preps[idx].done; saveApp(); }
+    function togglePrep(idx) {
+      appData.preps[idx].done = !appData.preps[idx].done;
+      saveApp();
+    }
     function addPrepPrompt() {
       const cat = prompt("請輸入分類（例如：重要證件、衣物、電子）：", "行李");
       if (!cat) return;
       const text = prompt("請輸入物品名稱：");
-      if (text) { appData.preps.push({ cat, text, done: false }); saveApp(); }
+      if (text) {
+        appData.preps.push({ cat, text, done: false });
+        saveApp();
+      }
     }
-    function delPrep(idx) { appData.preps.splice(idx, 1); saveApp(); }
+    function delPrep(idx) {
+      appData.preps.splice(idx, 1);
+      saveApp();
+    }
 
     // 記帳
     function saveExpense() {
@@ -1038,7 +1102,10 @@
       appData.expenses.push({ name, amount: Number(amount) });
       closeModal('budgetModal'); saveApp();
     }
-    function delExpense(idx) { appData.expenses.splice(idx, 1); saveApp(); }
+    function delExpense(idx) {
+      appData.expenses.splice(idx, 1);
+      saveApp();
+    }
     function calcRate(jpy) {
       const twd = Math.round(Number(jpy || 0) * 0.22);
       document.getElementById("calcResult").innerText = `➔ NT$ ${twd.toLocaleString()}`;
@@ -1049,9 +1116,15 @@
       const name = prompt("請輸入連結名稱：");
       if (!name) return;
       const url = prompt("請輸入網址：");
-      if (url) { appData.links.push({ name, url }); saveApp(); }
+      if (url) {
+        appData.links.push({ name, url });
+        saveApp();
+      }
     }
-    function delLink(idx) { appData.links.splice(idx, 1); saveApp(); }
+    function delLink(idx) {
+      appData.links.splice(idx, 1);
+      saveApp();
+    }
 
     // 匯出分享
     function exportData() {
